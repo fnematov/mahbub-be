@@ -18,6 +18,9 @@ class ServicesFactory extends Factory
     public function definition(): array
     {
         return [
+            'title_uz' => $this->faker->word() . '(UZ)',
+            'title_ru' => $this->faker->word() . ' (RU)',
+            'title_en' => $this->faker->word() . '(EN)',
             'main_info_uz' => $this->faker->sentence() . ' (UZ)',
             'main_info_ru' => $this->faker->sentence() . ' (RU)',
             'main_info_en' => $this->faker->sentence() . ' (EN)',

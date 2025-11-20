@@ -5,11 +5,12 @@ namespace App\Models;
 use Database\Factories\TourRouteFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 
 class TourRoute extends Model
 {
     /** @use HasFactory<TourRouteFactory> */
-    use HasFactory;
+    use HasFactory, HasFlexible;
 
     protected $fillable = [
         'tour_id',

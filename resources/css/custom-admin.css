@@ -1,0 +1,4 @@
+.custom-tab .grow {
+    display: flex;
+    flex-wrap: wrap;
+}

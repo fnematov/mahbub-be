@@ -12,6 +12,9 @@ class Services extends Model
     use HasFactory;
 
     protected $fillable = [
+        'title_uz',
+        'title_ru',
+        'title_en',
         'main_info_uz',
         'main_info_ru',
         'main_info_en',

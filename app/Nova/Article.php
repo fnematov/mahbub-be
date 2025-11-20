@@ -21,6 +21,11 @@ class Article extends Resource
         'id', 'title_uz', 'title_ru', 'title_en'
     ];
 
+    public static function label(): string
+    {
+        return 'Статьи';
+    }
+
     public static function indexQuery(NovaRequest $request, $query): Builder
     {
         return $query->with('media');
@@ -34,8 +39,10 @@ class Article extends Resource
             Image::make('изображения', 'media.path_ru')
                 ->onlyOnIndex(),
 
+
             MorphOne::make('Загрузка изображения', 'media', ArticleMedia::class)
                 ->required()
+                ->hideFromIndex()
                 ->asPanel(),
 
             Panel::make('Заголовок', [
@@ -53,20 +60,17 @@ class Article extends Resource
             ]),
 
             Panel::make('Краткое описание', [
-                Textarea::make('Краткое описание – UZ', 'description_uz')
+                Text::make('Краткое описание – UZ', 'description_uz')
                     ->required()
                     ->maxlength(512)
-                    ->rows(1)
                     ->hideFromIndex(),
-                Textarea::make('Краткое описание – RU', 'description_ru')
+                Text::make('Краткое описание – RU', 'description_ru')
+                    ->required()
+                    ->maxlength(512),
+//                    ->hideFromIndex(),
+                Text::make('Краткое описание – EN', 'description_en')
                     ->required()
                     ->maxlength(512)
-                    ->rows(1)
-                    ->hideFromIndex(),
-                Textarea::make('Краткое описание – EN', 'description_en')
-                    ->required()
-                    ->maxlength(512)
-                    ->rows(1)
                     ->hideFromIndex(),
             ]),
 

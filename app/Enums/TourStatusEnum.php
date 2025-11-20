@@ -4,26 +4,29 @@ namespace App\Enums;
 
 use App\Traits\EvolvedEnumsTrait;
 
-enum BaseStatusEnum: string
+enum TourStatusEnum: string
 {
     use EvolvedEnumsTrait;
 
     case ACTIVE = 'active';
     case INACTIVE = 'inactive';
+    case ARCHIVE = 'archive';
 
     public static function labels(): array
     {
         return [
             self::ACTIVE->value => 'Активный',
             self::INACTIVE->value => 'Не активный',
+            self::ARCHIVE->value => 'В архиве'
         ];
     }
 
     public static function iconMap(): array
     {
         return [
-            BaseStatusEnum::ACTIVE->value => 'success',
-            BaseStatusEnum::INACTIVE->value => 'warning',
+            TourStatusEnum::ACTIVE->value => 'success',
+            TourStatusEnum::INACTIVE->value => 'warning',
+            TourStatusEnum::ARCHIVE->value => 'danger',
 
         ];
     }
@@ -32,4 +35,5 @@ enum BaseStatusEnum: string
     {
         return self::labels()[$this->value];
     }
+
 }

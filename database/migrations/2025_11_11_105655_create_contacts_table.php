@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->json('phone2')->nullable();
             $table->json('working_days');
             $table->time('from');
-            $table->time('do');
+            $table->time('to');
             $table->timestamps();
         });
     }

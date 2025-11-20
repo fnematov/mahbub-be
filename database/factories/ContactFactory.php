@@ -32,7 +32,7 @@ class ContactFactory extends Factory
                 rand(4, 6)
             ),
             'from' => $this->faker->time('H:i', '09:00'),
-            'do' => $this->faker->time('H:i', '18:00'),
+            'to' => $this->faker->time('H:i', '18:00'),
         ];
     }
 }

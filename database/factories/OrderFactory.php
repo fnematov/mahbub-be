@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\Tour;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,7 +26,7 @@ class OrderFactory extends Factory
             'month' => $this->faker->monthName(),
             'adult_count' => $this->faker->numberBetween(1, 5),
             'child_count' => $this->faker->optional()->numberBetween(0, 3),
-            'status' => $this->faker->randomElement(['pending', 'confirmed', 'cancelled']),
+            'status' => $this->faker->randomElement(OrderStatusEnum::values()),
         ];
     }
 }

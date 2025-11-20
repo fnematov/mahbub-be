@@ -7,7 +7,8 @@ use App\Nova\Repeater\MediaRepeatable;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Repeater;
-use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Panel;
 
 class AboutUs extends Resource
 {
@@ -19,40 +20,50 @@ class AboutUs extends Resource
         'id', 'main_info_uz', 'main_info_ru', 'main_info_en'
     ];
 
+    public static function label(): string
+    {
+        return 'О нас';
+    }
+
+
     public function fields(Request $request): array
     {
         return [
             ID::make()->sortable(),
 
-            Text::make('Main Info Uz')
-                ->sortable()
-                ->rules('required'),
+            Panel::make("Основная информация", [
+                Textarea::make('Текстовая поля – UZ', 'main_info_uz')
+                    ->sortable()
+                    ->rules('required'),
 
-            Text::make('Main Info Ru')
-                ->sortable()
-                ->rules('required'),
+                Textarea::make('Текстовая поля – RU', 'main_info_ru')
+                    ->sortable()
+                    ->rules('required'),
 
-            Text::make('Main Info En')
-                ->sortable()
-                ->rules('required'),
+                Textarea::make('Текстовая поля – EN', 'main_info_en')
+                    ->sortable()
+                    ->rules('required'),
+            ]),
 
-            Text::make('Add Info Uz')
-                ->sortable()
-                ->rules('nullable'),
+            Panel::make("Дополнительная информация", [
+                Textarea::make('Текстовая поля – UZ', 'add_info_uz')
+                    ->sortable()
+                    ->rules('nullable'),
 
-            Text::make('Add Info Ru')
-                ->sortable()
-                ->rules('nullable'),
+                Textarea::make('Текстовая поля – RU', 'add_info_ru')
+                    ->sortable()
+                    ->rules('nullable'),
 
-            Text::make('Add Info En')
-                ->sortable()
-                ->rules('nullable'),
+                Textarea::make('Текстовая поля – EN', 'add_info_en')
+                    ->sortable()
+                    ->rules('nullable'),
+            ]),
 
             Repeater::make('Media', 'media')
-                ->initialRows(6)
                 ->repeatables([
                     MediaRepeatable::make()
                 ])
+                ->asHasMany(ArticleMedia::class),
         ];
     }
 }

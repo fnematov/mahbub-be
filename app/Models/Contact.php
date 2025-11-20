@@ -20,14 +20,12 @@ class Contact extends Model
         'phone2',
         'working_days',
         'from',
-        'do',
+        'to',
     ];
 
     protected $casts = [
         'phone1' => 'array',
         'phone2' => 'array',
         'working_days' => 'array',
-        'from' => 'datetime:H:i',
-        'do' => 'datetime:H:i',
     ];
 }

@@ -41,8 +41,8 @@ class DatabaseSeeder extends Seeder
         Review::factory()->count(15)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
         ]);
     }
 }
