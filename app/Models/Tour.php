@@ -3,17 +3,26 @@
 namespace App\Models;
 
 use App\Enums\TourStatusEnum;
+use App\Traits\HasLocalization;
 use Database\Factories\TourFactory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $info_tour
+ */
 class Tour extends Model
 {
     /** @use HasFactory<TourFactory> */
-    use HasFactory;
+    use HasFactory, HasLocalization;
 
     public int $country;
 
@@ -31,6 +40,13 @@ class Tour extends Model
         'info_tour_ru',
         'info_tour_en',
     ];
+
+    protected array $localized = ['name', 'info_tour'];
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->whereStatus(TourStatusEnum::ACTIVE);
+    }
 
     protected function casts(): array
     {
@@ -55,5 +71,26 @@ class Tour extends Model
     public function routes(): HasMany
     {
         return $this->hasMany(TourRoute::class, 'tour_id');
+    }
+
+    /**
+     * @return MorphMany<Media>
+     */
+    public function media(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'model');
+    }
+
+    public function firstMedia(): MorphOne|Media
+    {
+        return $this->morphOne(Media::class, 'model')->orderBy('id');
+    }
+
+    /**
+     * @return HasMany<Review>
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }

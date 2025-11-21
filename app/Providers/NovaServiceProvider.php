@@ -59,8 +59,12 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ->path('/resources/articles')
                     ->icon('document-text'),
 
-                MenuSection::make('Главная страница')
+                MenuSection::make('Тур-группы')
                     ->path('/resources/tour-groups')
+                    ->icon('document-text'),
+
+                MenuSection::make('Партнеры')
+                    ->path('/resources/partners')
                     ->icon('document-text'),
 
                 MenuSection::make('Пользователи')

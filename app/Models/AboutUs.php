@@ -2,15 +2,20 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocalization;
 use Database\Factories\AboutUsFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
+/**
+ * @property string $main_info
+ * @property string $add_info
+ */
 class AboutUs extends Model
 {
     /** @use HasFactory<AboutUsFactory> */
-    use HasFactory;
+    use HasFactory, HasLocalization;
 
     protected $table = 'about_us';
 
@@ -22,6 +27,8 @@ class AboutUs extends Model
         'add_info_ru',
         'add_info_en',
     ];
+
+    protected array $localized = ['main_info', 'add_info'];
 
     public function media(): MorphMany
     {

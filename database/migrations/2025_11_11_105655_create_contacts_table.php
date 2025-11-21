@@ -16,8 +16,8 @@ return new class extends Migration {
             $table->string('position_ru');
             $table->string('position_en');
             $table->string('manager_name');
-            $table->json('phone1');
-            $table->json('phone2')->nullable();
+            $table->string('phone1');
+            $table->string('phone2')->nullable();
             $table->json('working_days');
             $table->time('from');
             $table->time('to');

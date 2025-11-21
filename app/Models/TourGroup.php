@@ -2,13 +2,19 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocalization;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $description
+ */
 class TourGroup extends Model
 {
-    use HasFactory;
+    use HasFactory, HasLocalization;
 
     protected $fillable = [
         'name_uz',
@@ -19,6 +25,8 @@ class TourGroup extends Model
         'description_en',
         'order'
     ];
+
+    protected array $localized = ['name', 'description'];
 
     /**
      * @return BelongsToMany<Tour>

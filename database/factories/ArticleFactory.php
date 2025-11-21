@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\BaseStatusEnum;
 use App\Models\Article;
+use App\Models\Media;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,11 +12,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ArticleFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -27,7 +24,14 @@ class ArticleFactory extends Factory
             'content_uz' => $this->faker->text(500) . ' (UZ)',
             'content_ru' => $this->faker->text(500) . ' (RU)',
             'content_en' => $this->faker->text(500) . ' (EN)',
-            'status' => $this->faker->randomElement(['draft', 'published', 'archived']),
+            'status' => $this->faker->randomElement(BaseStatusEnum::values()),
         ];
+    }
+
+    public function configure(): ServicesFactory|Factory
+    {
+        return $this->afterCreating(function (Article $services) {
+            Media::factory(mt_rand(1, 5))->create(['model_id' => $services->id, 'model_type' => Article::class]);
+        });
     }
 }

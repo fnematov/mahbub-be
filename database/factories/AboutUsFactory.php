@@ -10,11 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class AboutUsFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -25,5 +20,12 @@ class AboutUsFactory extends Factory
             'add_info_ru' => $this->faker->optional()->paragraph(),
             'add_info_en' => $this->faker->optional()->paragraph(),
         ];
+    }
+
+    public function configure(): Factory|AboutUsFactory
+    {
+        return $this->afterCreating(function (AboutUs $aboutUs) {
+            $aboutUs->media()->saveMany(MediaFactory::new()->count(3)->make());
+        });
     }
 }

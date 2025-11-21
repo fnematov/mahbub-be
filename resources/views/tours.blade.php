@@ -21,6 +21,9 @@
                         class="focus:outline-none w-full -ml-1 font-medium text-lg 2xl:text-xl"
                     >
                         <option>Все направления</option>
+                        @foreach($countries as $country)
+                            <option value="{{$country->id}}">{{$country->name}}</option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -73,680 +76,73 @@
         <section
             class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 justify-items-center"
         >
-            <!-- Tour Card 1 - Turkey -->
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
+            @foreach($tours as $tour)
+                <article
+                    class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
                 >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
+                    <img
+                        src="{{url($tour->firstMedia->path)}}"
+                        alt="{{$tour->name}}"
+                        class="absolute w-full inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
+                    />
+                    <div
+                        class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
+                    >
+                        <div class="flex items-start gap-4 mb-2">
+                            @if($tour->location?->parent?->flag)
+                                <img
+                                    src="{{url($tour->location->parent->flag)}}"
+                                    alt="{{$tour->location->parent->name}}"
+                                    class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
+                                />
+                            @endif
+                            <div class="flex-1 min-w-0">
+                                <h3
+                                    class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
+                                >
+                                    {{$tour->location?->name}}, {{$tour->location?->parent?->name}}
+                                </h3>
+                                <p
+                                    class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
+                                >
+                                    {{$tour->name}}
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
+                        <div>
+                            <div class="flex flex-col gap-1">
+                                <p
+                                    class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
+                                >
+                                    {{$tour->days_count}} дней - {{$tour->nights_count}} ночей
+                                </p>
+                                <div class="flex items-center gap-1.5">
                   <span
                       class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
                   >От</span
                   >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
+                                    <span
+                                        class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
+                                    >${{$tour->price_adult}}</span
+                                    >
+                                </div>
                             </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
+                            <a
+                                href="{{route('tours.show', $tour)}}"
+                                class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
                             >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
+                                Подробнее
+                            </a>
                         </div>
                     </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article
-                class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
-            >
-                <img
-                    src="{{asset('image/tour.jpeg')}}"
-                    class="absolute inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
-                />
-                <div
-                    class="relative z-50 p-6 flex flex-col gap-2 justify-between h-full"
-                >
-                    <div class="flex items-start gap-4 mb-2">
-                        <img
-                            src="{{asset('image/uzb-flag.svg')}}"
-                            alt="UzbFlag"
-                            class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
-                        />
-                        <div class="flex-1 min-w-0">
-                            <h3
-                                class="font-condensed font-bold text-xl xl:text-2xl 2xl:text-[clamp(28px,2.083vw,40px)] leading-[1em] tracking-[-0.01em] text-black m-0"
-                            >
-                                Бухара, Узбекистан
-                            </h3>
-                            <p
-                                class="font-sans font-normal text-sm xl:text-base mt-1 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0 mb-1"
-                            >
-                                Историческая сказка
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-col gap-1">
-                            <p
-                                class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                            >
-                                14 дней - 13 ночей
-                            </p>
-                            <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
-                  >
-                                <span
-                                    class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                >$1200</span
-                                >
-                            </div>
-                        </div>
-                        <a
-                            href="tour.html"
-                            class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                        >
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </article>
+                </article>
+            @endforeach
         </section>
+
+        <!-- Pagination -->
+        <div class="w-full flex justify-center mt-12">
+            {{ $tours->onEachSide(1)->links('components.pagination') }}
+        </div>
     </main>
 
 @endsection

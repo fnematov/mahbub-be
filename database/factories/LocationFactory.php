@@ -6,27 +6,31 @@ use App\Models\Location;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Location>
+ * @extends Factory<Location>
  */
 class LocationFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
-        $hasParent = $this->faker->boolean(30); // 30% holatda child bo'ladi
-        $parentId = $hasParent ? Location::inRandomOrder()->value('id') : null;
-
+        $paths = [
+            'storage/uzb-flag.svg',
+            'storage/turkie-flug.svg',
+            'storage/egypt-flag.svg',
+            'storage/georgia-flag.svg',
+        ];
         return [
-            'parent_id' => $parentId,
             'name_uz' => $this->faker->city(),
             'name_ru' => $this->faker->city(),
             'name_en' => $this->faker->city(),
+            'flag' => $this->faker->randomElement($paths),
             'status' => $this->faker->randomElement(['active', 'inactive']),
         ];
+    }
 
+    public function configure(): LocationFactory|Factory
+    {
+        return $this->afterCreating(function (Location $location) {
+            $location->children()->saveMany(Location::factory(mt_rand(3, 6))->make());
+        });
     }
 }

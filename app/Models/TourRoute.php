@@ -2,15 +2,21 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocalization;
 use Database\Factories\TourRouteFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Whitecube\NovaFlexibleContent\Concerns\HasFlexible;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $description_tour
+ */
 class TourRoute extends Model
 {
     /** @use HasFactory<TourRouteFactory> */
-    use HasFactory, HasFlexible;
+    use HasFactory, HasFlexible, HasLocalization;
 
     protected $fillable = [
         'tour_id',
@@ -23,6 +29,8 @@ class TourRoute extends Model
         'description_tour_ru',
         'description_tour_en',
     ];
+
+    protected array $localized = ['name', 'description_tour'];
 
     public function tour()
     {

@@ -23,6 +23,17 @@ class Helper
     public static function getWeekDays(): Collection
     {
         return collect(range(1, 7))->map(fn($day) => Str::title(Carbon::create()->setISODate(2023, 1, $day)->locale('ru')->translatedFormat('l')));
+    }
 
+    public static function getWorkingDays(array $working_days): string
+    {
+        if (count($working_days) === 0) {
+            return '';
+        }
+
+        $begin = $working_days[0];
+        $end = $working_days[count($working_days) - 1];
+
+        return Str::title(Carbon::create()->setISODate(2025, 1, $begin)->locale('ru')->translatedFormat('l') . ' - ' . Carbon::create()->setISODate(2025, 1, $end)->locale('ru')->translatedFormat('l'));
     }
 }

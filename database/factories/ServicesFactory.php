@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Media;
 use App\Models\Services;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -10,11 +11,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class ServicesFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
@@ -27,6 +23,14 @@ class ServicesFactory extends Factory
             'add_info_uz' => $this->faker->optional()->paragraph() . ' (UZ)',
             'add_info_ru' => $this->faker->optional()->paragraph() . ' (RU)',
             'add_info_en' => $this->faker->optional()->paragraph() . ' (EN)',
+            'url' => url(route('tours')),
         ];
+    }
+
+    public function configure(): ServicesFactory|Factory
+    {
+        return $this->afterCreating(function (Services $services) {
+            Media::factory(mt_rand(1, 5))->create(['model_id' => $services->id, 'model_type' => Services::class]);
+        });
     }
 }

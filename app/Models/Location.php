@@ -3,25 +3,32 @@
 namespace App\Models;
 
 use App\Enums\BaseStatusEnum;
+use App\Traits\HasLocalization;
 use Database\Factories\LocationFactory;
-use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $id
+ * @property string $name
+ */
 class Location extends Model
 {
     /** @use HasFactory<LocationFactory> */
-    use HasFactory;
+    use HasFactory, HasLocalization;
 
     protected $fillable = [
         'parent_id',
         'name_uz',
         'name_ru',
         'name_en',
+        'flag',
         'status',
     ];
+
+    protected array $localized = ['name'];
 
     protected function casts(): array
     {
@@ -44,9 +51,11 @@ class Location extends Model
         return $this->hasMany(Location::class, 'parent_id');
     }
 
-    #[Scope]
-    public function active($query)
+    /**
+     * @return HasMany<Location>
+     */
+    public function tours(): HasMany
     {
-        return $query->where('status', BaseStatusEnum::ACTIVE);
+        return $this->hasMany(Tour::class);
     }
 }

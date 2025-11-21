@@ -25,6 +25,9 @@
     <!-- Custom Styles -->
     <link rel="stylesheet" href="{{asset('css/styles.css')}}"/>
 
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -112,12 +115,16 @@
     </button>
 
     <nav class="mt-12 flex flex-col gap-5">
-        <a href="{{route('home')}}" class="text-lg font-medium text-primary-green"
+        <a href="{{route('home')}}"
+           class="text-lg font-medium {{request()->routeIs('home') ? 'text-primary-green' : ''}}"
         >Главная</a
         >
-        <a href="{{route('tours')}}" class="text-lg font-medium">Туры</a>
-        <a href="articles.html" class="text-lg font-medium">Статьи</a>
-        <a href="contacts.html" class="text-lg font-medium">Контакты</a>
+        <a href="{{route('tours')}}"
+           class="text-lg font-medium" {{request()->routeIs('tours*') ? 'text-primary-green' : ''}}>Туры</a>
+        <a href="{{route('articles')}}"
+           class="text-lg font-medium {{request()->routeIs('articles*') ? 'text-primary-green' : ''}}">Статьи</a>
+        <a href="{{route('contacts')}}"
+           class="text-lg font-medium {{request()->routeIs('contacts') ? 'text-primary-green' : ''}}">Контакты</a>
     </nav>
 </div>
 
@@ -152,22 +159,21 @@
         >
             <a
                 href="{{route('home')}}"
-                class="font-medium text-base leading-6 tracking-[0.01em] text-primary-green text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
+                class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('home') ? 'text-primary-green' : ''}}"
             >Главная</a
             >
             <a
                 href="{{route('tours')}}"
-                class="font-medium text-base leading-6 tracking-[0.01em] no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
+                class="font-medium text-base leading-6 tracking-[0.01em] no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('tours*') ? 'text-primary-green' : ''}}"
             >Туры</a
             >
             <a
-                href="articles.html"
-                class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
-            >Статьи</a
-            >
+                href="{{route('articles')}}"
+                class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('articles*') ? 'text-primary-green' : ''}}"
+            >Статьи</a>
             <a
-                href="contacts.html"
-                class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity"
+                href="{{route('contacts')}}"
+                class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('contacts') ? 'text-primary-green' : ''}}"
             >Контакты</a
             >
         </div>
@@ -239,10 +245,6 @@
 </nav>
 
 @yield('content')
-
-
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <!-- Custom JavaScript -->
 <script>

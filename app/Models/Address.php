@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocalization;
 use Database\Factories\AddressFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $address
+ */
 class Address extends Model
 {
     /** @use HasFactory<AddressFactory> */
-    use HasFactory;
+    use HasFactory, HasLocalization;
 
     protected $fillable = [
         'address_uz',
@@ -17,6 +21,8 @@ class Address extends Model
         'address_en',
         'location',
     ];
+
+    protected array $localized = ['address'];
 
     protected function casts(): array
     {

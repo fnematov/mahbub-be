@@ -5,6 +5,7 @@ namespace App\Nova;
 use App\Enums\BaseStatusEnum;
 use App\Nova\Repeater\LocationRepeatable;
 use Arr;
+use DigitalCreative\Filepond\Filepond;
 use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\HasMany;
@@ -69,6 +70,9 @@ class Location extends Resource
             Select::make('Статус', 'status')
                 ->options(BaseStatusEnum::selectOptions())
                 ->onlyOnForms()
+                ->size('w-1/3'),
+
+            Filepond::make('Флаг', 'flag')
                 ->size('w-1/3'),
 
             HasMany::make('Городи в этом стране', 'children', self::class),

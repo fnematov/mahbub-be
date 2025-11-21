@@ -2,15 +2,16 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocalization;
 use Database\Factories\ServicesFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Services extends Model
 {
     /** @use HasFactory<ServicesFactory> */
-    use HasFactory;
+    use HasFactory, HasLocalization;
 
     protected $fillable = [
         'title_uz',
@@ -25,8 +26,10 @@ class Services extends Model
         'url'
     ];
 
-    public function media(): MorphMany
+    protected array $localized = ['title', 'main_info', 'add_info'];
+
+    public function media(): MorphOne
     {
-        return $this->morphMany(Media::class, 'model');
+        return $this->morphOne(Media::class, 'model');
     }
 }

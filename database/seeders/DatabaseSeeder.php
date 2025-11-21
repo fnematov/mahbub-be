@@ -6,11 +6,14 @@ use App\Models\AboutUs;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Contact;
+use App\Models\Location;
 use App\Models\Order;
+use App\Models\Partner;
 use App\Models\QuestionAnswer;
 use App\Models\Review;
 use App\Models\Services;
-use App\Models\TourRoute;
+use App\Models\Tour;
+use App\Models\TourGroup;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -24,21 +27,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            LocationSeeder::class,
-            TourSeeder::class,
-            MediaSeeder::class,
-        ]);
-        TourRoute::factory()->count(20)->create();
+        Location::factory()->count(10)->create();
+        Tour::factory()->count(50)->create();
+        TourGroup::factory()->count(5)->create();
 
         AboutUs::factory()->create();
-        Article::factory()->count(5)->create();
+        Article::factory()->count(25)->create();
         Contact::factory()->count(5)->create();
         Address::factory()->create();
         QuestionAnswer::factory()->count(20)->create();
         Services::factory()->count(15)->create();
         Order::factory()->count(15)->create();
         Review::factory()->count(15)->create();
+        Partner::factory()->count(10)->create();
 
         User::factory()->create([
             'name' => 'Admin',

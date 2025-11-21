@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\HasLocalization;
 use Database\Factories\ContactFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $position
+ */
 class Contact extends Model
 {
     /** @use HasFactory<ContactFactory> */
-    use HasFactory;
+    use HasFactory, HasLocalization;
 
     protected $fillable = [
         'position_uz',
@@ -23,9 +27,11 @@ class Contact extends Model
         'to',
     ];
 
+    protected array $localized = ['position'];
+
     protected $casts = [
-        'phone1' => 'array',
-        'phone2' => 'array',
         'working_days' => 'array',
+        'from' => 'datetime',
+        'to' => 'datetime',
     ];
 }
