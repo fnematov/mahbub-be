@@ -15,9 +15,10 @@ return new class extends Migration {
             $table->string('title_uz');
             $table->string('title_ru');
             $table->string('title_en');
-            $table->text('main_info_uz');
-            $table->text('main_info_ru');
-            $table->text('main_info_en');
+            $table->text('url')->nullable();
+            $table->text('main_info_uz')->nullable();
+            $table->text('main_info_ru')->nullable();
+            $table->text('main_info_en')->nullable();
             $table->text('add_info_uz')->nullable();
             $table->text('add_info_ru')->nullable();
             $table->text('add_info_en')->nullable();

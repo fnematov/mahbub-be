@@ -4,7 +4,9 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "build-custom-repeater": "cd nova-components/CustomRepeater && npm run dev",
+        "build-custom-repeater-prod": "cd nova-components/CustomRepeater && npm run prod"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",

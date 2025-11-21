@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\TourStatusEnum;
 use Database\Factories\TourFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,15 +32,16 @@ class Tour extends Model
         'info_tour_en',
     ];
 
-    protected $hidden = [
-        'country',
-    ];
-
     protected function casts(): array
     {
         return [
             'status' => TourStatusEnum::class,
         ];
+    }
+
+    public function country(): Attribute
+    {
+        return Attribute::make(fn() => $this->location?->parent_id);
     }
 
     public function location(): BelongsTo|Location

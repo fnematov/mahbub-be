@@ -10,16 +10,13 @@ use Naoray\NovaJson\JSON;
 class Address extends Resource
 {
 
-    public static $model = \App\Models\Address::class;
-
+    public static string $model = \App\Models\Address::class;
 
     public static $title = 'id';
-
 
     public static $search = [
         'id',
     ];
-
 
     public static function label(): string
     {

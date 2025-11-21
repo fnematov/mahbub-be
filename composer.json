@@ -11,11 +11,16 @@
     "require": {
         "php": "^8.2",
         "codenco-dev/nova-grid-system": "^2.0",
+        "coderello/laravel-nova-lang": "^2.0",
         "digital-creative/nova-filepond": "^1.0",
         "eminiarts/nova-tabs": "^2.2",
+        "fnematov/custom-repeater": "@dev",
         "laravel/framework": "^11.9",
         "laravel/nova": "^4.35",
         "laravel/tinker": "^2.9.1",
+        "lednerb/nova-action-button-selectors": "^2.0",
+        "maatwebsite/laravel-nova-excel": "^1.3",
+        "mostafaznv/nova-ckeditor": "^7.8",
         "naoray/nova-json": "^4.1",
         "oneduo/nova-time-field": "^2.0",
         "outl1ne/nova-multiselect-field": "^4.7",
@@ -97,6 +102,10 @@
         {
             "type": "composer",
             "url": "https://nova.laravel.com"
+        },
+        {
+            "type": "path",
+            "url": "./nova-components/CustomRepeater"
         }
     ],
     "minimum-stability": "stable",

@@ -4,11 +4,11 @@ namespace App\Nova;
 
 use App\Models\AboutUs as AboutUsModel;
 use App\Nova\Repeater\MediaRepeatable;
+use Fnematov\CustomRepeater\CustomRepeater;
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Repeater;
-use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Panel;
+use Mostafaznv\NovaCkEditor\CkEditor;
 
 class AboutUs extends Resource
 {
@@ -29,41 +29,36 @@ class AboutUs extends Resource
     public function fields(Request $request): array
     {
         return [
-            ID::make()->sortable(),
-
             Panel::make("Основная информация", [
-                Textarea::make('Текстовая поля – UZ', 'main_info_uz')
-                    ->sortable()
+                CkEditor::make('Текстовая поля – UZ', 'main_info_uz')
+                    ->stacked()
                     ->rules('required'),
 
-                Textarea::make('Текстовая поля – RU', 'main_info_ru')
-                    ->sortable()
+                CkEditor::make('Текстовая поля – RU', 'main_info_ru')
+                    ->stacked()
                     ->rules('required'),
 
-                Textarea::make('Текстовая поля – EN', 'main_info_en')
-                    ->sortable()
+                CkEditor::make('Текстовая поля – EN', 'main_info_en')
+                    ->stacked()
                     ->rules('required'),
+
             ]),
 
-            Panel::make("Дополнительная информация", [
-                Textarea::make('Текстовая поля – UZ', 'add_info_uz')
-                    ->sortable()
-                    ->rules('nullable'),
+            MorphMany::make('Изображение', 'media', NamedMedia::class)
+                ->onlyOnDetail(),
 
-                Textarea::make('Текстовая поля – RU', 'add_info_ru')
-                    ->sortable()
-                    ->rules('nullable'),
-
-                Textarea::make('Текстовая поля – EN', 'add_info_en')
-                    ->sortable()
-                    ->rules('nullable'),
-            ]),
-
-            Repeater::make('Media', 'media')
+            CustomRepeater::make('Media', 'media')
                 ->repeatables([
                     MediaRepeatable::make()
                 ])
-                ->asHasMany(ArticleMedia::class),
+                ->uniqueField('name_ru')
+                ->stacked()
+                ->fullWidth()
+                ->asMorphMany(NamedMedia::class)
+                ->withMeta([
+                    'fieldClass' => 'about-us-wrapper',
+                    'fieldComponentClass' => 'about-us-item'
+                ]),
         ];
     }
 }

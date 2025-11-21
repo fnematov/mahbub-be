@@ -59,6 +59,10 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ->path('/resources/articles')
                     ->icon('document-text'),
 
+                MenuSection::make('Главная страница')
+                    ->path('/resources/tour-group')
+                    ->icon('document-text'),
+
                 MenuSection::make('Пользователи')
                     ->path('/resources/users')
                     ->icon('document-text'),
@@ -66,11 +70,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                 MenuSection::make('Контакты', [
                     MenuItem::make('Контактные данные', '/resources/contacts'),
                     MenuItem::make('Адресные данные')->path('/resources/addresses'),
-                ])
-//                    ->path('/resources/contacts')
-                    ->icon('document-text'),
-
-                // ... existing Nova menu items
+                ])->icon('document-text')
+                    ->collapsable()
+                    ->collapsedByDefault(),
             ];
         });
 

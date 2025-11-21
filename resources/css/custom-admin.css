@@ -2,3 +2,8 @@
     display: flex;
     flex-wrap: wrap;
 }
+
+.about-us-wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -17,7 +19,7 @@ class Review extends Resource
 
 
     public static $search = [
-        'id',
+        'id', 'full_name'
     ];
 
     public static function label(): string
@@ -29,13 +31,16 @@ class Review extends Resource
     {
         return [
             Panel::make('Название тура', [
+                BelongsTo::make('Тур', 'tour', Tour::class)
+                    ->required()
+                    ->sortable()
+                    ->size('w-1/3'),
                 Text::make('Имя туриста', 'full_name')
                     ->maxlength(255)
                     ->required()
                     ->sortable()
                     ->size('w-1/3'),
-                Text::make('Дата оставления отзыва', 'created_at')
-                    ->maxlength(255)
+                DateTime::make('Дата оставления отзыва', 'created_at')
                     ->required()
                     ->sortable()
                     ->size('w-1/3'),
@@ -58,13 +63,15 @@ class Review extends Resource
                     ->sortable()
                     ->rules('required', 'integer', 'min:1', 'max:5')
                     ->size('w-1/3'),
-                Text::make('ID тура', 'tour_id')
-                    ->maxlength(255)
-                    ->required()
-                    ->sortable()
-                    ->size('w-1/3'),
-                Text::make('Оценка модератора', 'moderator_rate')
-                    ->maxlength(255)
+                Select::make('Оценка модератора', 'moderator_rate')
+                    ->options([
+                        0 => '0',
+                        200 => '200',
+                        400 => '400',
+                        600 => '600',
+                        800 => '800',
+                        1000 => '1000',
+                    ])
                     ->required()
                     ->sortable()
                     ->hideFromIndex()

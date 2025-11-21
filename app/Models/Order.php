@@ -6,6 +6,7 @@ use App\Enums\OrderStatusEnum;
 use Database\Factories\OrderFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Order extends Model
 {
@@ -29,7 +30,7 @@ class Order extends Model
         ];
     }
 
-    public function tour()
+    public function tour(): BelongsTo|Tour
     {
         return $this->belongsTo(Tour::class);
     }

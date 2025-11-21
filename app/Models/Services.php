@@ -5,6 +5,7 @@ namespace App\Models;
 use Database\Factories\ServicesFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Services extends Model
 {
@@ -21,5 +22,11 @@ class Services extends Model
         'add_info_uz',
         'add_info_ru',
         'add_info_en',
+        'url'
     ];
+
+    public function media(): MorphMany
+    {
+        return $this->morphMany(Media::class, 'model');
+    }
 }

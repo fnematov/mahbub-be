@@ -66,8 +66,8 @@ class Article extends Resource
                     ->hideFromIndex(),
                 Text::make('Краткое описание – RU', 'description_ru')
                     ->required()
-                    ->maxlength(512),
-//                    ->hideFromIndex(),
+                    ->maxlength(512)
+                    ->hideFromIndex(),
                 Text::make('Краткое описание – EN', 'description_en')
                     ->required()
                     ->maxlength(512)

@@ -3,9 +3,12 @@
 namespace App\Nova;
 
 use App\Models\Services;
-use Laravel\Nova\Fields\ID;
+use App\Nova\Repeater\MediaRepeatable;
+use Fnematov\CustomRepeater\CustomRepeater;
+use Laravel\Nova\Fields\MorphMany;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
+use Laravel\Nova\Fields\URL;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 
@@ -27,46 +30,70 @@ class Service extends Resource
         return 'Услуги';
     }
 
-    public function fields(NovaRequest $request)
+    public function fields(NovaRequest $request): array
     {
         return [
-            ID::make()->sortable(),
-
             Panel::make('Заголовок', [
                 Text::make('Заголовок – UZ', 'title_uz')
                     ->required()
                     ->maxlength(255)
+                    ->size('w-1/2')
                     ->hideFromIndex(),
                 Text::make('Заголовок – RU', 'title_ru')
                     ->required()
+                    ->size('w-1/2')
                     ->maxlength(255),
                 Text::make('Заголовок – EN', 'title_en')
                     ->hideFromIndex()
                     ->required()
+                    ->size('w-1/2')
                     ->maxlength(255),
+
+                URL::make('Ссылка', 'url')
+                    ->help('Введите любой URL с сайта')
+                    ->size('w-1/2')
+                    ->nullable()
             ]),
 
             Panel::make('Основная информация', [
                 Textarea::make('Основная информация – UZ', 'main_info_uz')
                     ->required()
-                    ->hideFromIndex(),
+                    ->size(),
                 Textarea::make('Основная информация – RU', 'main_info_ru')
+                    ->size()
                     ->required(),
                 Textarea::make('Основная информация – EN', 'main_info_en')
-                    ->hideFromIndex()
+                    ->size()
                     ->required(),
             ]),
 
             Panel::make('Дополнительная информация', [
                 Textarea::make('Дополнительная информация – UZ', 'add_info_uz')
                     ->required()
-                    ->hideFromIndex(),
+                    ->size(),
                 Textarea::make('Дополнительная информация – RU', 'add_info_ru')
+                    ->size()
                     ->required(),
                 Textarea::make('Дополнительная информация – EN', 'add_info_en')
-                    ->hideFromIndex()
+                    ->size()
                     ->required(),
             ]),
+
+            MorphMany::make('Изображение', 'media', NamedMedia::class)
+                ->onlyOnDetail(),
+
+            CustomRepeater::make('Media', 'media')
+                ->repeatables([
+                    MediaRepeatable::make()
+                ])
+                ->uniqueField('name_ru')
+                ->stacked()
+                ->fullWidth()
+                ->asMorphMany(NamedMedia::class)
+                ->withMeta([
+                    'fieldClass' => 'about-us-wrapper',
+                    'fieldComponentClass' => 'about-us-item'
+                ]),
         ];
     }
 }

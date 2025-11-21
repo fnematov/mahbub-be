@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Helpers\Helper;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
@@ -10,7 +11,7 @@ use Outl1ne\MultiselectField\Multiselect;
 
 class Contact extends Resource
 {
-    public static $model = \App\Models\Contact::class;
+    public static string $model = \App\Models\Contact::class;
 
 
     public static $title = 'id';
@@ -65,18 +66,7 @@ class Contact extends Resource
                     ->size('w-1/3'),
 
                 Multiselect::make('График работы', 'working_days')
-                    ->options([
-                        1 => 'Понедельник',
-                        2 => 'Вторник',
-                        3 => 'Среда',
-                        4 => 'Четверг',
-                        5 => 'Пятница',
-                        6 => 'Суббота',
-                        7 => 'Воскресенье'
-                    ])
-                    ->displayUsing(function ($value) {
-                        dd($value);
-                    })
+                    ->options(Helper::getWeekDays())
                     ->saveAsJSON()
                     ->hideFromIndex()
                     ->size('w-4/6'),

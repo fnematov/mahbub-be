@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('tour_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('phone');
-            $table->string('month');
+            $table->smallInteger('month')->nullable();
             $table->integer('adult_count');
             $table->integer('child_count')->nullable();
             $table->string('status');

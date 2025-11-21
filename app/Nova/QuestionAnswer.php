@@ -11,7 +11,7 @@ use Laravel\Nova\Panel;
 class QuestionAnswer extends Resource
 {
 
-    public static $model = \App\Models\QuestionAnswer::class;
+    public static string $model = \App\Models\QuestionAnswer::class;
 
 
     public static $title = 'title_ru';
@@ -35,21 +35,33 @@ class QuestionAnswer extends Resource
                 Text::make('Вопрос – UZ', 'question_uz')
                     ->required()
                     ->maxlength(255)
+                    ->stacked()
+                    ->fullWidth()
                     ->hideFromIndex(),
                 Textarea::make('Ответ – UZ', 'answer_uz')
                     ->required()
+                    ->stacked()
+                    ->fullWidth()
                     ->hideFromIndex(),
                 Text::make('Вопрос – RU', 'question_ru')
                     ->required()
+                    ->stacked()
+                    ->fullWidth()
                     ->maxlength(255),
                 Textarea::make('Ответ – RU', 'answer_ru')
+                    ->stacked()
+                    ->fullWidth()
                     ->required(),
                 Text::make('Вопрос – EN', 'question_en')
                     ->hideFromIndex()
                     ->required()
+                    ->stacked()
+                    ->fullWidth()
                     ->maxlength(255),
                 Textarea::make('Ответ – EN', 'answer_en')
                     ->required()
+                    ->stacked()
+                    ->fullWidth()
                     ->hideFromIndex(),
             ]),
 

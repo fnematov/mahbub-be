@@ -9,8 +9,11 @@ use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
 use Eminiarts\Tabs\Traits\HasTabs;
 use Laravel\Nova\Fields\Badge;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Currency;
 use Laravel\Nova\Fields\FormData;
+use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -25,16 +28,16 @@ class Tour extends Resource
 
     public static string $model = \App\Models\Tour::class;
 
-    public static $title = 'id';
+    public static $title = 'name_ru';
 
     public static $search = [
-        'id',
+        'id', 'name_uz', 'name_ru', 'name_en'
     ];
 
     public function fields(NovaRequest $request): array
     {
         return [
-
+            ID::make()->sortable()->onlyOnIndex(),
             Panel::make('Данные о туре', [
                 Text::make('Название – UZ', 'name_uz')
                     ->rules('required', 'max:255')
@@ -42,6 +45,7 @@ class Tour extends Resource
                     ->size('w-1/3'),
                 Text::make('Название – RU', 'name_ru')
                     ->rules('required', 'max:255')
+                    ->filterable()
                     ->size('w-1/3'),
                 Text::make('Название – EN', 'name_en')
                     ->rules('required', 'max:255')
@@ -49,19 +53,28 @@ class Tour extends Resource
                     ->size('w-1/3'),
                 Select::make('Страна', 'country')
                     ->rules('required')
-                    ->hideFromIndex()
+                    ->onlyOnForms()
                     ->options(
                         \App\Models\Location::all()
                             ->whereNull('parent_id')
                             ->pluck('name_ru', 'id')
+                            ->toArray()
                     )
+                    ->displayUsingLabels()
+                    ->fillUsing(function ($request, $model, $attribute, $requestAttribute) {
+                    })
                     ->size('w-1/3'),
 
 
-                Select::make('Город', 'location_id')
-                    ->options([])
+                Select::make('', 'location_id')
+                    ->options(\App\Models\Location::all()
+                        ->whereNotNull('parent_id')
+                        ->pluck('name_ru', 'id')
+                        ->toArray()
+                    )
                     ->rules('required')
-                    ->hideFromIndex()
+                    ->onlyOnForms()
+                    ->displayUsingLabels()
                     ->dependsOn('country', function (Select $field, NovaRequest $request, FormData $formData) {
                         if ($formData->country) {
                             $options = \App\Models\Location::all()
@@ -71,6 +84,15 @@ class Tour extends Resource
                             $field->options($options);
                         }
                     })->size('w-1/3'),
+
+                Text::make('Страна', fn() => "<a href='/admin/resources/locations/{$this->location?->parent_id}' class='link-default'>{$this->location?->parent?->name_ru}</a>")
+                    ->asHtml()
+                    ->size('w-1/3')
+                    ->exceptOnForms(),
+
+                BelongsTo::make('Город', 'location', Location::class)
+                    ->size('w-1/3')
+                    ->exceptOnForms(),
 
                 Select::make('Статус', 'status')
                     ->options(TourStatusEnum::selectOptions())
@@ -113,6 +135,9 @@ class Tour extends Resource
                         ->size()
                 ])->name('tab-1'),
                 Tab::make('Маршрут тура', [
+                    HasMany::make('', 'routes', TourRoute::class)
+                        ->onlyOnDetail(),
+
                     Flexible::make(null)
                         ->addLayout('день', 'tour_routes', [
                             Text::make('Название – UZ', 'name_uz')
@@ -132,11 +157,11 @@ class Tour extends Resource
 
                             Currency::make('Дополнительная цена для взрослых', 'add_price_adult')
                                 ->currency('UZS')
-                                ->rules('required', 'numeric')
+                                ->rules('nullable', 'numeric')
                                 ->size('w-1/3'),
                             Currency::make('Дополнительная цена для детей', 'add_price_child')
                                 ->currency('UZS')
-                                ->rules('required', 'numeric')
+                                ->rules('nullable', 'numeric')
                                 ->size('w-1/3'),
 
                             Textarea::make('Описание маршрута – UZ', 'description_tour_uz')
@@ -151,6 +176,7 @@ class Tour extends Resource
                             'wrapperClass' => 'my-flexible-wrapper',
                         ])
                         ->resolver(TourRouteResolver::class)
+                        ->onlyOnForms()
                         ->fullWidth(),
                 ])->name('tab-2')->addBodyClass('custom-tab'),
             ]),
