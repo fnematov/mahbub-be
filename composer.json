@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.9.1",
         "lednerb/nova-action-button-selectors": "^2.0",
         "maatwebsite/laravel-nova-excel": "^1.3",
+        "mcamara/laravel-localization": "^2.3",
         "mostafaznv/nova-ckeditor": "^7.8",
         "naoray/nova-json": "^4.1",
         "oneduo/nova-time-field": "^2.0",

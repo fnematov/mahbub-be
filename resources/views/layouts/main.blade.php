@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use App\Helpers\Helper;use Mcamara\LaravelLocalization\Facades\LaravelLocalization; @endphp
+    <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8"/>
@@ -187,8 +188,9 @@
                     class="flex items-center gap-2 px-4 bg-white/50 backdrop-blur-[40px] rounded-2xl font-medium text-[15px] leading-[1.6em] tracking-[0.01em] text-black cursor-pointer hover:bg-white/70 transition-colors"
                     onclick="toggleLanguageDropdown('languageDropdown')"
                 >
-                    <span class="text-xl">🇷🇺</span>
-                    <span>RU</span>
+                    <span
+                        class="text-xl">{{Helper::getLocaleFlag(LaravelLocalization::getCurrentLocale())}}</span>
+                    <span>{{Helper::getLocaleName(LaravelLocalization::getCurrentLocale())}}</span>
                     <svg
                         width="16"
                         height="16"
@@ -210,27 +212,16 @@
                     id="languageDropdown"
                     class="absolute top-full right-0 mt-2 bg-white rounded-2xl shadow-lg overflow-hidden hidden z-50 min-w-[120px]"
                 >
-                    <button
-                        class="w-full flex items-center gap-2 px-4 py-3 hover:bg-bg-gray transition-colors text-left"
-                        onclick="selectLanguage('RU', '🇷🇺', 'languageDropdown')"
-                    >
-                        <span class="text-xl">🇷🇺</span>
-                        <span class="font-medium text-[15px] text-black">RU</span>
-                    </button>
-                    <button
-                        class="w-full flex items-center gap-2 px-4 py-3 hover:bg-bg-gray transition-colors text-left"
-                        onclick="selectLanguage('EN', '🇬🇧', 'languageDropdown')"
-                    >
-                        <span class="text-xl">🇬🇧</span>
-                        <span class="font-medium text-[15px] text-black">EN</span>
-                    </button>
-                    <button
-                        class="w-full flex items-center gap-2 px-4 py-3 hover:bg-bg-gray transition-colors text-left"
-                        onclick="selectLanguage('UZ', '🇺🇿', 'languageDropdown')"
-                    >
-                        <span class="text-xl">🇺🇿</span>
-                        <span class="font-medium text-[15px] text-black">UZ</span>
-                    </button>
+                    @foreach(LaravelLocalization::getSupportedLocales() as $locale => $localeData)
+                        <a
+                            href="{{ LaravelLocalization::getLocalizedURL($locale, url()->current()) }}"
+                            class="w-full flex items-center gap-2 px-4 py-3 hover:bg-bg-gray transition-colors text-left"
+                        >
+                            <span class="text-xl">{{Helper::getLocaleFlag($locale)}}</span>
+                            <span
+                                class="font-medium text-[15px] text-black">{{ Helper::getLocaleName($locale) }}</span>
+                        </a>
+                    @endforeach
                 </div>
             </div>
             <img

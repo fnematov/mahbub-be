@@ -24,7 +24,7 @@ class ArticleFactory extends Factory
             'content_uz' => $this->faker->text(500) . ' (UZ)',
             'content_ru' => $this->faker->text(500) . ' (RU)',
             'content_en' => $this->faker->text(500) . ' (EN)',
-            'status' => $this->faker->randomElement(BaseStatusEnum::values()),
+            'status' => BaseStatusEnum::ACTIVE,
         ];
     }
 

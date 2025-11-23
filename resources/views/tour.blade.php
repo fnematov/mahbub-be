@@ -5,7 +5,7 @@
         <!-- Tour Header -->
         <section
             class="mb-8 flex flex-col max-lg:gap-8 lg:flex-row item-center justify-between max-w-[1080px] 2xl:max-w-[1180px] mx-auto">
-            <div class="max-sm:flex max-sm:items-center max-sm:justify-between">
+            <div class="flex-1 max-sm:flex max-sm:items-center max-sm:justify-between">
                 <div class="flex items-start gap-4">
                     @if($tour->location?->parent?->flag)
                         <div
@@ -25,26 +25,20 @@
                         </p>
                     </div>
                 </div>
-                <button
-                    class="px-[14px] sm:hidden py-[14px] bg-bg-gray rounded-[32px] font-medium text-lg cursor-pointer hover:bg-[#e8e8e8] transition-colors">
-                    <img src="{{asset('image/icons/ShareFat.svg')}}" alt="">
-                </button>
             </div>
-            <div class="flex item-center max-lg:justify-between gap-3">
-                <!-- Price Button -->
+            <div class="flex-none flex item-center max-lg:justify-between gap-3">
                 <div class="mb-3 max-sm:w-full">
-                    <button
+                    <div
                         class="w-full flex items-center justify-center gap-3 px-5 py-4 2xl:px-6 2xl:py-5 bg-bg-gray rounded-[32px] font-medium text-base 2xl:text-lg leading-[1.333em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#e8e8e8] transition-colors">
                         <span>Цена: от</span>
                         <span class="font-semibold text-primary-green">${{$tour->price_child}}</span>
                         <span>до</span>
                         <span class="font-semibold text-primary-green">${{$tour->price_adult}}</span>
-                        <img src="{{asset('image/icons/info.svg')}}" alt="">
-                    </button>
+                    </div>
                 </div>
 
                 <!-- Share Button -->
-                <div class="mb-3 hidden sm:block">
+                <div class="mb-3 sm:block">
                     <button
                         class="w-full flex items-center justify-center gap-2 px-5 py-4 2xl:px-6 2xl:py-5 bg-bg-gray rounded-[32px] font-medium text-base 2xl:text-lg leading-[1.333em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#e8e8e8] transition-colors">
                         <img src="{{asset('image/icons/ShareFat.svg')}}" alt="">

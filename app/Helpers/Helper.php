@@ -36,4 +36,22 @@ class Helper
 
         return Str::title(Carbon::create()->setISODate(2025, 1, $begin)->locale('ru')->translatedFormat('l') . ' - ' . Carbon::create()->setISODate(2025, 1, $end)->locale('ru')->translatedFormat('l'));
     }
+
+    public static function getLocaleFlag(string $locale): string
+    {
+        return match ($locale) {
+            'uz' => '🇺🇿',
+            'en' => '🇬🇧',
+            default => '🇷🇺'
+        };
+    }
+
+    public static function getLocaleName(string $locale): string
+    {
+        return match ($locale) {
+            'uz' => 'UZ',
+            'en' => 'EN',
+            default => 'RU'
+        };
+    }
 }
