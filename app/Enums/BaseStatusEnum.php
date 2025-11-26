@@ -24,7 +24,6 @@ enum BaseStatusEnum: string
         return [
             BaseStatusEnum::ACTIVE->value => 'success',
             BaseStatusEnum::INACTIVE->value => 'warning',
-
         ];
     }
 

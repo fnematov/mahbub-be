@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,7 +19,7 @@ return new class extends Migration {
             $table->smallInteger('month')->nullable();
             $table->integer('adult_count');
             $table->integer('child_count')->nullable();
-            $table->string('status');
+            $table->string('status')->default(OrderStatusEnum::NEW->value);
             $table->timestamps();
         });
     }

@@ -96,78 +96,7 @@
                         Оставить запрос
                     </h3>
 
-                    <form class="space-y-4">
-                        <div
-                            class="w-full px-3 py-2 bg-white rounded-2xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
-                            <label
-                                class="block font-normal text-[12px]/[14px] 2xl:text-[13px]/[16px] tracking-[0.01em] text-label-gray">
-                                Имя
-                                <span class="text-required-label">*</span>
-                            </label>
-                            <input type="text" class="focus:outline-none w-full" placeholder="Введите ваше имя">
-                        </div>
-
-                        <div
-                            class="w-full px-3 py-2 bg-white rounded-2xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
-                            <label class="block font-normal text-[13px]/[16px] tracking-[0.01em] text-label-gray">
-                                Телефон
-                                <span class="text-required-label">*</span>
-                            </label>
-                            <input type="tel" class="focus:outline-none w-full" placeholder="+998 (__) ___ __ __">
-                        </div>
-
-                        <div
-                            class="w-full px-3 py-2 bg-white rounded-2xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
-                            <label class="block font-normal text-[13px]/[16px] tracking-[0.01em] text-label-gray">
-                                Месяц отбытия
-                            </label>
-                            <select class="focus:outline-none w-full -ml-1">
-                                @foreach(Helper::getMonths() as $key => $month)
-                                    <option value="{{$key}}">
-                                        {{$month}}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div
-                            class="w-full pl-3 pr-[6px] py-[6px] bg-white rounded-2xl flex items-center justify-between shadow-sm">
-                            <!-- Chap qism -->
-                            <div>
-                                <label class="block text-[13px]/[16px] tracking-[0.01em] text-gray-400">
-                                    Количество туристов
-                                </label>
-                                <p class="text-black 2xl:text-lg text-base font-semibold">
-                                    <span id="touristText">2</span> туристов
-                                </p>
-                            </div>
-
-                            <!-- O'ng qism -->
-                            <div class="flex items-center gap-2 bg-gray-100 rounded-xl px-[3px] py-[3px]">
-                                <button
-                                    id="decreaseBtn"
-                                    class="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center text-xl text-black hover:bg-gray-50 active:scale-95 transition"
-                                >
-                                    −
-                                </button>
-
-                                <span id="touristCount"
-                                      class="w-8 text-center 2xl:text-lg text-base font-medium">2</span>
-
-                                <button
-                                    id="increaseBtn"
-                                    class="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center text-xl text-black hover:bg-gray-50 active:scale-95 transition"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-
-                        <button type="submit"
-                                class="w-full 2xl:px-8 2xl:py-4 py-3 bg-primary-green border-none rounded-2xl font-medium 2xl:text-xl text-lg leading-[1.2em] tracking-[0.01em] text-white cursor-pointer hover:bg-[#067a47] transition-colors">
-                            Отправить
-                        </button>
-                    </form>
+                    <x-form button-text="Отправить"/>
                 </div>
             </aside>
         </div>

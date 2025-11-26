@@ -39,6 +39,7 @@ class Tour extends Model
         'info_tour_uz',
         'info_tour_ru',
         'info_tour_en',
+        'event_months',
     ];
 
     protected array $localized = ['name', 'info_tour'];
@@ -48,10 +49,26 @@ class Tour extends Model
         $query->whereStatus(TourStatusEnum::ACTIVE);
     }
 
+    public function scopeFilter(Builder $query): void
+    {
+        $location = request()->get('location');
+        $month = request()->get('month');
+
+        $query->when($location, function ($query) use ($location) {
+            $location_ids = Location::where('parent_id', $location)->pluck('id');
+            return $query->whereIn('location_id', $location_ids);
+        });
+
+        $query->when($month, function ($query) use ($month) {
+            $query->whereJsonContains('event_months', $month);
+        });
+    }
+
     protected function casts(): array
     {
         return [
             'status' => TourStatusEnum::class,
+            'event_months' => 'array',
         ];
     }
 

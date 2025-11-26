@@ -1,5 +1,5 @@
+@php use App\Helpers\Helper; @endphp
 @extends('layouts.main')
-
 @section('content')
     <main class="max-w-[1920px] mx-auto pt-[110px] px-[20px] md:px-[60px] pb-[100px]">
         <!-- Tour Header -->
@@ -244,118 +244,7 @@
                         Забронировать место
                     </h3>
 
-                    <form class="space-y-4">
-                        <div
-                            class="w-full px-3 py-2 bg-white rounded-2xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
-                            <label
-                                class="block font-normal text-[12px]/[14px] 2xl:text-[13px]/[16px] tracking-[0.01em] text-label-gray">
-                                Имя
-                                <span class="text-required-label">*</span>
-                            </label>
-                            <input type="text" class="focus:outline-none w-full" placeholder="Введите ваше имя">
-                        </div>
-
-                        <div
-                            class="w-full px-3 py-2 bg-white rounded-2xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
-                            <label
-                                class="block font-normal text-[12px]/[14px] 2xl:text-[13px]/[16px] tracking-[0.01em] text-label-gray">
-                                Телефон
-                                <span class="text-required-label">*</span>
-                            </label>
-                            <input type="tel" class="focus:outline-none w-full" placeholder="+998 (__) ___ __ __">
-                        </div>
-
-                        <div
-                            class="w-full px-3 py-2 bg-white rounded-2xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
-                            <label
-                                class="block font-normal text-[12px]/[14px] 2xl:text-[13px]/[16px] tracking-[0.01em] text-label-gray">
-                                Месяц отбытия
-                            </label>
-                            <select class="focus:outline-none w-full -ml-1">
-                                <option value="september">
-                                    Сентябрь
-                                </option>
-                                <option value="october">
-                                    Октябрь
-                                </option>
-                            </select>
-                        </div>
-
-                        <div
-                            class="w-full pl-3 pr-[6px] py-[6px] bg-white rounded-2xl flex items-center justify-between shadow-sm">
-                            <!-- Chap qism -->
-                            <div>
-                                <label
-                                    class="block text-[12px]/[14px] 2xl:text-[13px]/[16px] tracking-[0.01em] text-gray-400">
-                                    Количество взрослых
-                                </label>
-                                <p class="text-black 2xl:text-lg text-base font-semibold">
-                                    <span id="adultCountText">2</span> взрослых
-                                </p>
-                            </div>
-
-                            <!-- O'ng qism -->
-                            <div class="flex items-center gap-2 bg-gray-100 rounded-xl px-[3px] py-[3px]">
-                                <button
-                                    id="decreaseBtn"
-                                    class="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center text-xl text-black hover:bg-gray-50 active:scale-95 transition"
-                                >
-                                    −
-                                </button>
-
-                                <span id="adultCount" class="w-8 text-center 2xl:text-lg text-base font-medium">2</span>
-
-                                <button
-                                    id="increaseBtn"
-                                    class="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center text-xl text-black hover:bg-gray-50 active:scale-95 transition"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-                        <div
-                            class="w-full pl-3 pr-[6px] py-[6px] bg-white rounded-2xl flex items-center justify-between shadow-sm">
-                            <!-- Chap qism -->
-                            <div>
-                                <label
-                                    class="block text-[12px]/[14px] 2xl:text-[13px]/[16px] tracking-[0.01em] text-gray-400">
-                                    Количество детей
-                                </label>
-                                <p class="text-black 2xl:text-lg text-base font-semibold">
-                                    <span id="childrenCountText">1</span> ребенок
-                                </p>
-                            </div>
-
-                            <!-- O'ng qism -->
-                            <div class="flex items-center gap-2 bg-gray-100 rounded-xl px-[3px] py-[3px]">
-                                <button
-                                    id="decreaseChildrenBtn"
-                                    class="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center text-xl text-black hover:bg-gray-50 active:scale-95 transition"
-                                >
-                                    −
-                                </button>
-
-                                <span id="childrenCount"
-                                      class="w-8 text-center 2xl:text-lg text-base font-medium">1</span>
-
-                                <button
-                                    id="increaseChildrenBtn"
-                                    class="w-10 h-10 bg-white rounded-lg shadow-sm flex items-center justify-center text-xl text-black hover:bg-gray-50 active:scale-95 transition"
-                                >
-                                    +
-                                </button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <button
-                                type="submit"
-                                class="mt-2 w-full 2xl:px-8 2xl:py-4 px-6 py-3 bg-primary-green border-none rounded-2xl font-medium 2xl:text-xl text-lg leading-[1.2em] tracking-[0.01em] text-white cursor-pointer hover:bg-[#067a47] transition-colors"
-                            >
-                                Забронировать
-                            </button>
-                        </div>
-                    </form>
+                    <x-form button-text="Забронировать"/>
                 </div>
 
                 <!-- Contact Info -->
@@ -379,58 +268,6 @@
     </main>
 
     <script>
-
-        const countEl = document.getElementById("adultCount");
-        const textEl = document.getElementById("adultCountText");
-        const decBtn = document.getElementById("decreaseBtn");
-        const incBtn = document.getElementById("increaseBtn");
-
-        const countChildrenEl = document.getElementById("childrenCount");
-        const textChildrenEl = document.getElementById("childrenCountText");
-        const decChildrenBtn = document.getElementById("decreaseChildrenBtn");
-        const incChildrenBtn = document.getElementById("increaseChildrenBtn");
-
-        let count = 2;
-        let childrenCount = 1;
-
-        decBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            if (count > 1) {
-                count--;
-                updateCount();
-            }
-        });
-
-        incBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            count++;
-            updateCount();
-        });
-
-        function updateChildrenCount() {
-            countChildrenEl.textContent = childrenCount;
-            textChildrenEl.textContent = childrenCount;
-        }
-
-        decChildrenBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            if (childrenCount > 1) {
-                childrenCount--;
-                updateChildrenCount();
-            }
-        });
-
-        incChildrenBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-            childrenCount++;
-            updateChildrenCount();
-        });
-
-        function updateCount() {
-            countEl.textContent = count;
-            textEl.textContent = count;
-        }
-
         // Tab Switching
         function switchTab(tabName) {
             // Hide all tabs

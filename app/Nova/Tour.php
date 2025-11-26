@@ -2,8 +2,8 @@
 
 namespace App\Nova;
 
-use App\Enums\BaseStatusEnum;
 use App\Enums\TourStatusEnum;
+use App\Helpers\Helper;
 use App\Nova\Flexible\Resolvers\TourRouteResolver;
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
@@ -20,6 +20,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
+use Outl1ne\MultiselectField\Multiselect;
 use Whitecube\NovaFlexibleContent\Flexible;
 
 class Tour extends Resource
@@ -97,12 +98,19 @@ class Tour extends Resource
                 Select::make('Статус', 'status')
                     ->options(TourStatusEnum::selectOptions())
                     ->required()
+                    ->onlyOnForms()
                     ->size('w-1/3'),
 
                 Badge::make('Статус', 'status')
-                    ->map(BaseStatusEnum::iconMap())
+                    ->map(TourStatusEnum::iconMap())
                     ->label(fn() => $this->status->title())
                     ->withIcons(),
+
+                Multiselect::make('Месяц', 'event_months')
+                    ->options(Helper::getMonths())
+                    ->saveAsJSON()
+                    ->hideFromIndex()
+                    ->size('w-4/6'),
 
                 Currency::make('Цена для взрослых', 'price_adult')
                     ->rules('required', 'numeric')
@@ -112,13 +120,27 @@ class Tour extends Resource
                     ->rules('required', 'numeric')
                     ->hideFromIndex()
                     ->size('w-1/3'),
+
+                Text::make('Дни', function () {
+                    $text = '';
+                    if ($this->days_count > 0) {
+                        $text .= "$this->days_count дней";
+                    }
+                    if ($this->nights_count > 0) {
+                        $text .= "<br>$this->nights_count ночей";
+                    }
+                    return $text;
+                })->asHtml(),
+
                 Number::make('Дней', 'days_count')
                     ->sortable()
                     ->rules('required', 'integer')
+                    ->onlyOnForms()
                     ->size('w-1/6'),
                 Number::make('Ночей', 'nights_count')
                     ->sortable()
                     ->rules('required', 'integer')
+                    ->onlyOnForms()
                     ->size('w-1/6'),
             ]),
 

@@ -1,3 +1,4 @@
+@php use App\Helpers\Helper; @endphp
 @extends('layouts.main')
 
 @section('content')
@@ -6,8 +7,10 @@
     <div
         class="mt-[108px] w-full 2xl:max-w-[1180px] max-w-[1100px] px-5 mx-auto"
     >
-        <div
+        <form
             class="flex md:items-center flex-col md:flex-row gap-2 md:p-1 p-2 pl-2 bg-white rounded-[24px] shadow-[0px_0px_20px_0px_rgba(0,0,0,0.1)]"
+            action="{{route('tours')}}"
+            method="get"
         >
             <div
                 class="flex-1 flex flex-col gap-[6px] 2xl:gap-[10px] px-4 py-2 md:border-r md:border-border-gray min-w-0"
@@ -19,10 +22,14 @@
                 <div class="flex justify-between items-center gap-1">
                     <select
                         class="focus:outline-none w-full -ml-1 font-medium text-lg 2xl:text-xl"
+                        name="location"
                     >
-                        <option>Все направления</option>
+                        <option value="">Все направления</option>
                         @foreach($countries as $country)
-                            <option value="{{$country->id}}">{{$country->name}}</option>
+                            <option value="{{$country->id}}"
+                                {{ request('location') == $country->id ? 'selected' : '' }}>
+                                {{$country->name}}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -32,31 +39,20 @@
             >
                 <label
                     class="font-normal text-sm 2xl:text-base leading-4 tracking-[0.01em] text-light-gray"
-                >Дата</label
-                >
-                <div class="flex justify-between items-center gap-1">
-                    <input
-                        type="date"
-                        class="w-full font-medium text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-black whitespace-nowrap overflow-hidden text-ellipsis"
-                        placeholder="Выберите дату"
-                    />
-                </div>
-            </div>
-            <div
-                class="flex-1 flex flex-col gap-[6px] 2xl:gap-[10px] px-4 py-2 min-w-0"
-            >
-                <label
-                    class="font-normal text-sm 2xl:text-base leading-4 tracking-[0.01em] text-light-gray"
-                >Туристы</label
+                >Месяц</label
                 >
                 <div class="flex justify-between items-center gap-1">
                     <select
                         class="focus:outline-none w-full -ml-1 font-medium text-lg 2xl:text-xl"
+                        name="month"
                     >
-                        <option>1 турист</option>
-                        <option>2 турист</option>
-                        <option>3 турист</option>
-                        <option>4 турист</option>
+                        <option value="">Любые ближайшие месяцы</option>
+                        @foreach(Helper::getMonths() as $key => $months)
+                            <option value="{{$key}}"
+                                {{ request('month') !== null && request('month') === (string)$key ? 'selected' : '' }}>
+                                {{$months}}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -65,7 +61,7 @@
             >
                 Подобрать
             </button>
-        </div>
+        </form>
     </div>
 
     <!-- Main Content -->

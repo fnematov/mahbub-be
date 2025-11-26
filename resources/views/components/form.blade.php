@@ -1,0 +1,70 @@
+@php use App\Helpers\Helper; @endphp
+@props([
+    'buttonText' => 'Отправить',
+    'showMonth' => true,
+])
+
+<form class="space-y-4" method="post" action="{{ route('order') }}">
+    @csrf
+
+    {{-- ERRORS --}}
+    @if ($errors->any())
+        <div class="p-4 mb-4 bg-red-50 border border-red-400 text-red-700 rounded-xl">
+            <ul class="list-disc list-inside space-y-1">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="p-4 mb-4 bg-green-50 border border-green-400 text-green-700 rounded-xl">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    {{-- Hidden counters --}}
+    @if(isset($tour))
+        <input type="hidden" name="tour_id" value="{{$tour->id}}">
+    @endif
+
+    {{-- Name --}}
+    <x-input.label title="Имя" required>
+        <input type="text" name="name" value="{{old('name')}}" maxlength="100" class="w-full focus:outline-none"
+               placeholder="Введите ваше имя">
+    </x-input.label>
+
+    {{-- Phone --}}
+    <x-input.label title="Телефон" required>
+        <input type="tel" name="phone" value="{{old('phone')}}" maxlength="19" class="w-full focus:outline-none"
+               placeholder="+998 (__) ___ __ __">
+    </x-input.label>
+
+    {{-- Month selector (optional) --}}
+    @if ($showMonth)
+        <x-input.label title="Месяц отбытия">
+            <select class="w-full focus:outline-none -ml-1" name="month">
+                <option value="">Любые ближайшие месяцы</option>
+                @foreach(Helper::getMonths() as $key => $months)
+                    <option value="{{ $key }}" {{ old('month') == $key ? 'selected' : '' }}>
+                        {{ $months }}
+                    </option>
+                @endforeach
+            </select>
+        </x-input.label>
+    @endif
+
+    {{-- Adults counter --}}
+    <x-counter title="Количество взрослых" id="adult_count" text="взрослых" default="{{old('adult_count') ?? 2}}"/>
+
+    {{-- Children counter --}}
+    <x-counter title="Количество детей" id="child_count" text="ребенок" default="{{old('child_count') ?? 1}}"/>
+
+    {{-- Submit button --}}
+    <button type="submit"
+            class="w-full py-3 bg-primary-green rounded-2xl font-medium text-lg 2xl:text-xl text-white hover:bg-[#067a47] transition">
+        {{ $buttonText }}
+    </button>
+
+</form>

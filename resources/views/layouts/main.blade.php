@@ -28,6 +28,7 @@
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/imask"></script>
 
     <script>
         tailwind.config = {
@@ -390,7 +391,17 @@
             }
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var phoneInput = document.querySelector("input[name='phone']");
+        if (phoneInput) {
+            IMask(phoneInput, {
+                mask: '+998 (00) 000 00 00'
+            });
+        }
+    });
 </script>
+@yield('scripts')
 <script src="{{resource_path('js/mobile-nav.js')}}"/>
 </body>
 </html>

@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
@@ -45,17 +44,15 @@ class Order extends Resource
                 ->filterable()
                 ->sortable(),
 
-            Text::make('Номер телефона', 'phone')
+            Text::make('Номер телефона', function () {
+                return "<a class='link-default' href='tel:$this->phone'>$this->phone</a>";
+            })
+                ->asHtml()
                 ->sortable(),
 
             Text::make('Месяц отбытия', 'month')
-                ->displayUsing(fn($value) => Helper::getMonthName($value))
+                ->resolveUsing(fn($value) => Helper::getMonthName($value))
                 ->sortable(),
-
-            Select::make('Месяц отбытия', 'month')
-                ->options(Helper::getMonths())
-                ->onlyOnForms()
-                ->filterable(),
 
             Text::make('Количество туристов', function () {
                 $text = '';

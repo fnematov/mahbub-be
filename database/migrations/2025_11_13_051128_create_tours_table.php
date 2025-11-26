@@ -29,6 +29,8 @@ return new class extends Migration {
             $table->text('info_tour_uz')->nullable();
             $table->text('info_tour_ru')->nullable();
             $table->text('info_tour_en')->nullable();
+
+            $table->jsonb('event_months')->nullable();
             $table->timestamps();
         });
     }

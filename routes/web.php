@@ -13,4 +13,5 @@ Route::group([
     Route::get('/articles', [HomeController::class, 'articles'])->name('articles');
     Route::get('/articles/{article}', [HomeController::class, 'article'])->name('articles.show');
     Route::get('/contacts', [HomeController::class, 'contacts'])->name('contacts');
+    Route::post('/order', [HomeController::class, 'submitOrder'])->name('order');
 });

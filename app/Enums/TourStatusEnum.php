@@ -27,7 +27,6 @@ enum TourStatusEnum: string
             TourStatusEnum::ACTIVE->value => 'success',
             TourStatusEnum::INACTIVE->value => 'warning',
             TourStatusEnum::ARCHIVE->value => 'danger',
-
         ];
     }
 
