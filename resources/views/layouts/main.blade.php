@@ -8,6 +8,25 @@
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary-green": "#079156",
+                        "bg-gray": "#F2F2F2",
+                        "text-gray": "#777777",
+                        "border-gray": "#E2E2E2",
+                        "light-gray": "#A1A1A1",
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        condensed: ["Fira Sans Condensed", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
 
     <!-- Swiper CSS -->
     <link
@@ -29,27 +48,7 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/imask"></script>
-    <script src="{{asset('js/mobile-nav.js')}}"/>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        "primary-green": "#079156",
-                        "bg-gray": "#F2F2F2",
-                        "text-gray": "#777777",
-                        "border-gray": "#E2E2E2",
-                        "light-gray": "#A1A1A1",
-                    },
-                    fontFamily: {
-                        sans: ["Inter", "sans-serif"],
-                        condensed: ["Fira Sans Condensed", "sans-serif"],
-                    },
-                },
-            },
-        };
-    </script>
+    <script src="{{asset('js/mobile-nav.js')}}"></script>
 
     <style>
         .trust-swiper,
