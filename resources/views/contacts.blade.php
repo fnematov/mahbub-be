@@ -76,7 +76,7 @@
                         {{ __('messages.sales_office_address') }}
                     </h2>
 
-                    <div class="">
+                    <div>
                         @foreach($addresses as $key => $address)
                             <div class="flex items-center gap-2 mb-6">
                                 <img src="{{asset('image/icons/MapPin.svg')}}" alt="">
@@ -86,8 +86,8 @@
                                     </p>
                                 </div>
                             </div>
-                            <div class="w-full h-[480px] bg-white rounded-[24px] overflow-hidden">
-                                <div id="map{{$key}}" class="h-full"></div>
+                            <div class="w-full h-[480px] bg-white rounded-[24px] overflow-hidden mb-6">
+                                {!! $address->embed_map !!}
                             </div>
                         @endforeach
                     </div>

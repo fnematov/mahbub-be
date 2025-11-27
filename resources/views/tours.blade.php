@@ -106,30 +106,24 @@
                             </div>
                         </div>
                         <div>
-                            <div class="flex flex-col gap-1">
-                                <p
-                                    class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
-                                >
-                                    {{$tour->days_count}} {{ __('messages.day') }}
-                                    - {{$tour->nights_count}} {{ __('messages.nights') }}
-                                </p>
-                                <div class="flex items-center gap-1.5">
-                  <span
-                      class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >{{ __('messages.from') }}</span
-                  >
-                                    <span
-                                        class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
-                                    >${{$tour->price_adult}}</span
-                                    >
+                            <div class="flex items-center justify-between bg-white/70 backdrop-blur-sm rounded-2xl p-4">
+                                <div class="flex flex-col">
+                                    <p class="font-sans font-normal md:text-lg text-base leading-[1.333em] text-text-gray m-0">
+                                        {{$tour->days_count}} {{ __('messages.days') }}
+                                        - {{$tour->nights_count}} {{ __('messages.nights') }}
+                                    </p>
+                                    <div class="flex items-center gap-1.5">
+                                        <span
+                                            class="font-sans font-normal text-base md:text-lg leading-[1.111em] text-text-gray">{{ __('messages.from') }}</span>
+                                        <span
+                                            class="font-sans font-semibold text-base md:text-xl leading-[1.2em] text-primary-green">${{$tour->price_adult}}</span>
+                                    </div>
                                 </div>
+                                <a href="{{route('tours.show', $tour)}}"
+                                   class="2xl:px-8 2xl:py-4 xl:px-6 xl:py-3 py-2 px-4 bg-white border-none rounded-2xl font-medium 2xl:text-xl xl:text-lg text-base leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all">
+                                    {{ __('messages.details') }}
+                                </a>
                             </div>
-                            <a
-                                href="{{route('tours.show', $tour)}}"
-                                class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
-                            >
-                                {{ __('messages.details') }}
-                            </a>
                         </div>
                     </div>
                 </article>

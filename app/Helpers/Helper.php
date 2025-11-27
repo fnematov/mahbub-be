@@ -31,8 +31,8 @@ class Helper
             return '';
         }
 
-        $begin = $working_days[0];
-        $end = $working_days[count($working_days) - 1];
+        $begin = (int)$working_days[0];
+        $end = (int)$working_days[count($working_days) - 1];
 
         return Str::title(Carbon::create()->setISODate(2025, 1, $begin)->locale('ru')->translatedFormat('l') . ' - ' . Carbon::create()->setISODate(2025, 1, $end)->locale('ru')->translatedFormat('l'));
     }

@@ -61,7 +61,10 @@ class Tour extends Model
         });
 
         $query->when(!is_null($month), function ($query) use ($month) {
-            $query->whereJsonContains('event_months', $month);
+            $query->where(function ($q) use ($month) {
+                $q->whereJsonContains('event_months', (int)$month)
+                    ->orWhereJsonContains('event_months', (string)$month);
+            });
         });
     }
 

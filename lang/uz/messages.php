@@ -125,4 +125,5 @@ return [
     '24_7' => '24/7 aloqada',
     'all_directions' => 'Barcha yo\'nalishlar',
     'pick_up' => 'Tanlash',
+    'submit' => 'Yuborish'
 ];

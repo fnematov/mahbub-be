@@ -273,12 +273,12 @@
                     </p>
 
                     <div class="flex items-center gap-3 mb-4">
-                        <img src="./assets/icons/phone.svg" alt="phone icon">
+                        <img src="{{asset('image/icons/phone.svg')}}" alt="phone icon">
                         <span class="font-sans font-medium 2xl:text-lg text-base leading-[1.333em] text-black">+998 (88) 800 9000</span>
                     </div>
 
                     <div class="flex items-center gap-3">
-                        <img src="./assets/icons/clock.svg" alt="clock icon">
+                        <img src="{{asset('image/icons/clock.svg')}}" alt="clock icon">
                         <span
                             class="font-sans font-medium 2xl:text-lg text-base leading-[1.333em] text-black">{{ __('messages.24_7') }}</span>
                     </div>

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('address_uz');
             $table->string('address_ru');
             $table->string('address_en');
-            $table->json('location');
+            $table->text('embed_map')->nullable();
             $table->timestamps();
         });
     }

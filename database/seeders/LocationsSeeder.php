@@ -15,7 +15,7 @@ class LocationsSeeder extends Seeder
                 'name_uz' => 'O\'zbekiston',
                 'name_ru' => 'Узбекистан',
                 'name_en' => 'Uzbekistan',
-                'flag' => 'storage/uzb-flag.svg',
+                'flag' => 'uzb-flag.svg',
                 'children' => [
                     ['name_uz' => 'Toshkent', 'name_ru' => 'Ташкент', 'name_en' => 'Tashkent'],
                     ['name_uz' => 'Samarqand', 'name_ru' => 'Самарканд', 'name_en' => 'Samarkand'],
@@ -27,7 +27,7 @@ class LocationsSeeder extends Seeder
                 'name_uz' => 'Turkiya',
                 'name_ru' => 'Турция',
                 'name_en' => 'Turkey',
-                'flag' => 'storage/turkie-flug.svg',
+                'flag' => 'turkie-flug.svg',
                 'children' => [
                     ['name_uz' => 'Istanbul', 'name_ru' => 'Стамбул', 'name_en' => 'Istanbul'],
                     ['name_uz' => 'Anqara', 'name_ru' => 'Анкара', 'name_en' => 'Ankara'],
@@ -39,7 +39,7 @@ class LocationsSeeder extends Seeder
                 'name_uz' => 'Misr',
                 'name_ru' => 'Египет',
                 'name_en' => 'Egypt',
-                'flag' => 'storage/egypt-flag.svg',
+                'flag' => 'egypt-flag.svg',
                 'children' => [
                     ['name_uz' => 'Qohira', 'name_ru' => 'Каир', 'name_en' => 'Cairo'],
                     ['name_uz' => 'Sharm ash-Shayx', 'name_ru' => 'Шарм-эль-Шейх', 'name_en' => 'Sharm El Sheikh'],
@@ -50,7 +50,7 @@ class LocationsSeeder extends Seeder
                 'name_uz' => 'Tailand',
                 'name_ru' => 'Таиланд',
                 'name_en' => 'Thailand',
-                'flag' => 'storage/thailand-flag.svg',
+                'flag' => 'thailand-flag.svg',
                 'children' => [
                     ['name_uz' => 'Bangkok', 'name_ru' => 'Бангкок', 'name_en' => 'Bangkok'],
                     ['name_uz' => 'Pxuket', 'name_ru' => 'Пхукет', 'name_en' => 'Phuket'],
@@ -61,7 +61,7 @@ class LocationsSeeder extends Seeder
                 'name_uz' => 'Gruziya',
                 'name_ru' => 'Грузия',
                 'name_en' => 'Georgia',
-                'flag' => 'storage/georgia-flag.svg',
+                'flag' => 'georgia-flag.svg',
                 'children' => [
                     ['name_uz' => 'Tbilisi', 'name_ru' => 'Тбилиси', 'name_en' => 'Tbilisi'],
                     ['name_uz' => 'Batumi', 'name_ru' => 'Батуми', 'name_en' => 'Batumi'],
@@ -71,7 +71,7 @@ class LocationsSeeder extends Seeder
                 'name_uz' => 'Malayziya',
                 'name_ru' => 'Малайзия',
                 'name_en' => 'Malaysia',
-                'flag' => 'storage/malaysia-flag.svg',
+                'flag' => 'malaysia-flag.svg',
                 'children' => [
                     ['name_uz' => 'Kuala-Lumpur', 'name_ru' => 'Куала-Лумпур', 'name_en' => 'Kuala Lumpur'],
                     ['name_uz' => 'Langkavi', 'name_ru' => 'Лангкави', 'name_en' => 'Langkawi'],

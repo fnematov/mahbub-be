@@ -14,7 +14,7 @@ class PartnerFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
-            'logo' => 'storage/uzb-airways.png',
+            'logo' => 'uzb-airways.png',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];

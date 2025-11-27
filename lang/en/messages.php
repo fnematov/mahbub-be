@@ -125,4 +125,5 @@ return [
     '24_7' => '24/7 in touch',
     'all_directions' => 'All destinations',
     'pick_up' => 'Pick up',
+    'submit' => 'Submit',
 ];

@@ -19,15 +19,8 @@ class Address extends Model
         'address_uz',
         'address_ru',
         'address_en',
-        'location',
+        'embed_map',
     ];
 
     protected array $localized = ['address'];
-
-    protected function casts(): array
-    {
-        return [
-            'location' => 'array',
-        ];
-    }
 }

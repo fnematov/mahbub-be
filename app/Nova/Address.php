@@ -4,8 +4,8 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Naoray\NovaJson\JSON;
 
 class Address extends Resource
 {
@@ -23,7 +23,7 @@ class Address extends Resource
         return 'Адресные данные';
     }
 
-    public function fields(NovaRequest $request)
+    public function fields(NovaRequest $request): array
     {
         return [
             ID::make()->sortable(),
@@ -42,13 +42,14 @@ class Address extends Resource
                 ->rules('required')
                 ->hideFromIndex()
                 ->sortable(),
-
-            JSON::make('Расположение', 'location', [
-                Text::make('Широта', 'lat')->rules(['numeric', 'required'])
-                    ->hideFromIndex(),
-                Text::make('Долгота', 'lng')->rules(['numeric', 'required'])
-                    ->hideFromIndex(),
-            ]),
+            Textarea::make('Встроенная карта', 'embed_map')
+                ->onlyOnForms()
+                ->sortable(),
+            Text::make('Встроенная карта', 'embed_map')
+                ->onlyOnDetail()
+                ->hideFromIndex()
+                ->asHtml()
+                ->sortable(),
         ];
     }
 }
