@@ -2,22 +2,11 @@
 @props([
     'buttonText' => 'Отправить',
     'showMonth' => true,
+    'tour_id' => null
 ])
 
 <form class="space-y-4" method="post" action="{{ route('order') }}">
     @csrf
-
-    {{-- ERRORS --}}
-    @if ($errors->any())
-        <div class="p-4 mb-4 bg-red-50 border border-red-400 text-red-700 rounded-xl">
-            <ul class="list-disc list-inside space-y-1">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     @if (session('success'))
         <div class="p-4 mb-4 bg-green-50 border border-green-400 text-green-700 rounded-xl">
             {{ session('success') }}
@@ -25,8 +14,8 @@
     @endif
 
     {{-- Hidden counters --}}
-    @if(isset($tour))
-        <input type="hidden" name="tour_id" value="{{$tour->id}}">
+    @if(isset($tour_id))
+        <input type="hidden" name="tour_id" value="{{$tour_id}}">
     @endif
 
     {{-- Name --}}
@@ -62,6 +51,16 @@
     <x-counter title="Количество детей" id="child_count" text="ребенок" default="{{old('child_count') ?? 1}}"/>
 
     {{-- Submit button --}}
+    {{-- ERRORS --}}
+    @if ($errors->order->any())
+        <div class="p-4 mb-4 bg-red-50 border border-red-400 text-red-700 rounded-xl">
+            <ul class="list-disc list-inside space-y-1">
+                @foreach ($errors->order->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <button type="submit"
             class="w-full py-3 bg-primary-green rounded-2xl font-medium text-lg 2xl:text-xl text-white hover:bg-[#067a47] transition">
         {{ $buttonText }}

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ReviewStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -20,6 +21,7 @@ return new class extends Migration {
             $table->text('comment_uz')->nullable();
             $table->text('comment_ru')->nullable();
             $table->text('comment_en')->nullable();
+            $table->string('status')->default(ReviewStatusEnum::NEW->value);
             $table->timestamps();
         });
     }

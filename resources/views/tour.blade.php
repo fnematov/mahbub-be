@@ -178,7 +178,14 @@
                         @endif
 
                         <!-- Leave Review Section -->
-                        <form>
+                        <form method="post" action="{{ route('review') }}">
+                            @if (session('success'))
+                                <div class="p-4 mb-4 bg-green-50 border border-green-400 text-green-700 rounded-xl">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+                            @csrf
+                            <input type="hidden" name="tour_id" value="{{$tour->id}}">
                             <h3 class="font-condensed font-medium text-3xl 2xl:text-4xl leading-[1em] tracking-[-0.01em] text-black mb-6 m-0">
                                 Оставить отзыв
                             </h3>
@@ -194,37 +201,48 @@
                                 </div>
 
                                 <!-- Hidden input to submit rating -->
-                                <input type="hidden" name="rating" id="ratingValue">
+                                <input type="hidden" name="rating" id="ratingValue" value="{{ old('rating') ?? 5 }}">
                             </div>
                             <div
-                                class="w-full 2xl:px-5 2xl:py-2 py-1 px-5 bg-bg-gray mb-4 rounded-[24px] border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
+                                class="w-full 2xl:px-5 2xl:py-2 py-1 px-5 bg-bg-gray mb-4 rounded-xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
                                 <label
                                     class="block font-normal 2xl:text-[13px]/[16px] text-[11px]/[14px] tracking-[0.01em] text-label-gray">
                                     Имя
                                     <span class="text-required-label">*</span>
                                 </label>
-                                <input type="text"
+                                <input type="text" name="full_name" value="{{old('full_name')}}" maxlength="100"
                                        class="focus:outline-none 2xl:text-base text-sm bg-transparent w-full"
                                        placeholder="Введите ваше имя">
                             </div>
 
                             <div
-                                class="w-full 2xl:px-5 2xl:py-2 py-1 px-5 bg-bg-gray mb-4 rounded-[24px] border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
+                                class="w-full 2xl:px-5 2xl:py-2 py-1 px-5 bg-bg-gray mb-4 rounded-xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
                                 <label
                                     class="block font-normal 2xl:text-[13px]/[16px] text-[11px]/[14px] tracking-[0.01em] text-label-gray">
                                     Телефон
                                     <span class="text-required-label">*</span>
                                 </label>
-                                <input type="tel" class="focus:outline-none 2xl:text-base text-sm bg-transparent w-full"
+                                <input type="tel" name="phone" value="{{old('phone')}}" maxlength="19"
+                                       class="focus:outline-none 2xl:text-base text-sm bg-transparent w-full"
                                        placeholder="+998 (__) ___ __ __">
                             </div>
-                            <div class="bg-bg-gray rounded-[24px] p-5 min-h-[240px]">
-                                <textarea
-                                    class="w-full h-full bg-transparent border-none outline-none resize-none font-sans font-normal 2xl:text-lg text-base leading-[1.333em] tracking-[0.01em] text-black placeholder-text-gray"
-                                    placeholder="Напишите ваш отзыв здесь..."
-                                    rows="10"
-                                ></textarea>
+                            <div class="bg-bg-gray rounded-xl p-5 min-h-[240px]">
+                                <textarea name="comment_ru"
+                                          class="w-full h-full bg-transparent border-none outline-none resize-none font-sans font-normal 2xl:text-lg text-base leading-[1.333em] tracking-[0.01em] text-black placeholder-text-gray"
+                                          placeholder="Напишите ваш отзыв здесь..."
+                                          rows="10"
+                                >{{old('comment_ru')}}</textarea>
                             </div>
+                            {{-- ERRORS --}}
+                            @if ($errors->review->any())
+                                <div class="p-4 mb-4 bg-red-50 border border-red-400 text-red-700 rounded-xl">
+                                    <ul class="list-disc list-inside space-y-1">
+                                        @foreach ($errors->review->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <button type="submit"
                                     class="mt-4 w-full 2xl:px-8 2xl:py-4 py-3 bg-primary-green border-none rounded-2xl font-medium 2xl:text-xl text-lg leading-[1.2em] tracking-[0.01em] text-white cursor-pointer hover:bg-[#067a47] transition-colors">
                                 Отправить
@@ -239,12 +257,12 @@
                 class="w-full lg:w-[380px] flex-shrink-0 lg:sticky lg:top-[100px] max-lg:pt-14 max-lg:mt-4 max-lg:border-t">
 
                 <!-- Booking Form -->
-                <div class="bg-bg-gray rounded-[32px] h-[520px] p-6 mb-3">
+                <div class="bg-bg-gray rounded-[32px] p-6 mb-3">
                     <h3 class="font-sans font-medium text-lg 2xl:text-xl leading-[1.2em] text-black mb-6 m-0">
                         Забронировать место
                     </h3>
 
-                    <x-form button-text="Забронировать"/>
+                    <x-form button-text="Забронировать" tour_id="{{$tour->id}}"/>
                 </div>
 
                 <!-- Contact Info -->
@@ -298,13 +316,13 @@
 
         const ratingElement = document.getElementById("rating");
         const ratingValue = document.getElementById("ratingValue");
-        let currentRating = 0;
+        let currentRating = 5;
 
         // Create stars dynamically
         for (let i = 1; i <= 5; i++) {
             const star = document.createElement("span");
             star.innerHTML = "★";
-            star.className = "text-3xl transition-all";
+            star.className = "text-3xl transition-all text-yellow-400";
 
             // Hover — temporary highlight
             star.addEventListener("mouseover", () => highlightStars(i));

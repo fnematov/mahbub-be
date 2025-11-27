@@ -88,7 +88,7 @@ class HomeController extends Controller
 
     public function submitOrder(Request $request)
     {
-        $data = $request->validate([
+        $data = $request->validateWithBag('order', [
             'tour_id' => 'nullable|exists:tours,id',
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:19',
@@ -97,8 +97,9 @@ class HomeController extends Controller
             'child_count' => 'required|int|min:0',
         ]);
 
-        $existing = Order::where('tour_id', $data['tour_id'])
-            ->where('phone', $data['phone'])
+        $existing = Order::when($data['tour_id'] ?? null, function ($query) use ($data) {
+            return $query->where('tour_id', $data['tour_id']);
+        })->where('phone', $data['phone'])
             ->where('month', $data['month'])
             ->first();
 
@@ -109,8 +110,27 @@ class HomeController extends Controller
 
         Order::query()->create($data);
 
-        return redirect()
-            ->back()
+        return back()
             ->with('success', __('messages.order_created'));
+    }
+
+
+    public function submitReview(Request $request)
+    {
+        $data = $request->validateWithBag('review', [
+            'tour_id' => 'nullable|exists:tours,id',
+            'full_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:19',
+            'rating' => 'required|int|min:1|max:5',
+            'comment_ru' => 'nullable|string|max:255',
+        ], []);
+
+        Review::query()->updateOrCreate([
+            'tour_id' => $data['tour_id'],
+            'phone' => $data['phone'],
+        ], $data);
+
+        return back()
+            ->with('success', __('messages.review_created'));
     }
 }

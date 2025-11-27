@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ReviewStatusEnum;
 use App\Enums\TourStatusEnum;
 use App\Traits\HasLocalization;
 use Database\Factories\TourFactory;
@@ -108,6 +109,6 @@ class Tour extends Model
      */
     public function reviews(): HasMany
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(Review::class)->where('status', ReviewStatusEnum::ACTIVE);
     }
 }

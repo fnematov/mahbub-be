@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ReviewStatusEnum;
 use App\Traits\HasLocalization;
 use Database\Factories\ReviewFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -26,7 +27,15 @@ class Review extends Model
         'comment_uz',
         'comment_ru',
         'comment_en',
+        'status',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'status' => ReviewStatusEnum::class,
+        ];
+    }
 
     protected array $localized = ['comment'];
 

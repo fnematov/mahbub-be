@@ -12,6 +12,7 @@
             class="absolute left-[20px] right-[20px] xl:left-[60px] xl:right-[60px] min-h-[700px] xl:h-[850px] 2xl:min-h-[1200px] bg-bg-gray rounded-[32px]"
         >
             <img
+                alt="Mahbub Tour"
                 src="{{asset('image/image2.jpg')}}"
                 class="w-full h-full min-h-[700px] xl:h-[850px] 2xl:min-h-[1200px] object-cover rounded-[32px]"
             />
@@ -32,11 +33,12 @@
                 Найдите свой идеальный путешествие с легкостью и забронируйте ваш тур
                 прямо сейчас
             </p>
-            <button
+            <a
+                href="{{route('tours')}}"
                 class="px-6 py-3 2xl:px-8 2xl:py-4 bg-white border-none rounded-2xl font-medium 2xl:text-xl text-lg leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
             >
                 Посмотреть все туры
-            </button>
+            </a>
         </div>
 
         <div

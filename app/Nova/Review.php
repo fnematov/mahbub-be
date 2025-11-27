@@ -2,6 +2,8 @@
 
 namespace App\Nova;
 
+use App\Enums\ReviewStatusEnum;
+use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Select;
@@ -49,7 +51,7 @@ class Review extends Resource
                     ->required()
                     ->sortable()
                     ->hideFromIndex()
-                    ->size('w-1/3'),
+                    ->size('w-1/4'),
 
                 Select::make('Рейтинг', 'rating')
                     ->options([
@@ -62,7 +64,7 @@ class Review extends Resource
                     ->displayUsingLabels() // admin panelda label ko‘rinadi
                     ->sortable()
                     ->rules('required', 'integer', 'min:1', 'max:5')
-                    ->size('w-1/3'),
+                    ->size('w-1/4'),
                 Select::make('Оценка модератора', 'moderator_rate')
                     ->options([
                         0 => '0',
@@ -75,7 +77,20 @@ class Review extends Resource
                     ->required()
                     ->sortable()
                     ->hideFromIndex()
-                    ->size('w-1/3'),
+                    ->size('w-1/4'),
+
+                Select::make('Статус', 'status')
+                    ->options(ReviewStatusEnum::selectOptions())
+                    ->required()
+                    ->sortable()
+                    ->hideFromIndex()
+                    ->size('w-1/4'),
+
+                Badge::make('Статус', 'status')
+                    ->map(ReviewStatusEnum::iconMap())
+                    ->label(fn() => $this->status->title())
+                    ->withIcons()
+                    ->size('w-1/4'),
 
                 Textarea::make('Содержание отзыва – UZ (Оригинал)', 'comment_uz')
                     ->rules('required')
