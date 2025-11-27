@@ -43,11 +43,11 @@ class Media extends Model
         });
 
         static::updating(function ($media) {
-            if (!$media->path_uz) {
+            if (!$media->path_uz !== $media->path_ru) {
                 $media->path_uz = $media->path_ru;
             }
 
-            if (!$media->path_en) {
+            if (!$media->path_en !== $media->path_ru) {
                 $media->path_en = $media->path_ru;
             }
         });
