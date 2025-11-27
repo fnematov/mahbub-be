@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('contact_phone')->nullable();
             $table->string('contact_email')->nullable();
             $table->string('website_title')->nullable();
+            $table->string('google_map_api_key')->nullable();
             $table->timestamps();
         });
     }

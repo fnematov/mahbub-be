@@ -55,38 +55,38 @@ class Settings extends Resource
 
                 Text::make('Описание баннера - UZ', 'banner_description_uz')
                     ->maxlength(255)
-                    ->required()
                     ->hideFromIndex()
                     ->sortable()
                     ->size('w-1/3'),
                 Text::make('Описание баннера - RU', 'banner_description_ru')
                     ->maxlength(255)
-                    ->required()
                     ->sortable()
                     ->hideFromIndex()
                     ->size('w-1/3'),
                 Text::make('Описание баннера - EN', 'banner_description_en')
                     ->maxlength(255)
-                    ->required()
                     ->sortable()
                     ->hideFromIndex()
                     ->size('w-1/3'),
 
                 Text::make('Контактный телефон', 'contact_phone')
                     ->maxlength(255)
-                    ->required()
                     ->sortable()
                     ->hideFromIndex()
                     ->size('w-1/3'),
                 Text::make('Электронная почта', 'contact_email')
                     ->maxlength(255)
-                    ->required()
                     ->sortable()
                     ->hideFromIndex()
                     ->size('w-1/3'),
                 Text::make('Название сайта', 'website_title')
                     ->maxlength(255)
-                    ->required()
+                    ->sortable()
+                    ->hideFromIndex()
+                    ->size('w-1/3'),
+
+                Text::make('API ключ Google Maps', 'google_map_api_key')
+                    ->maxlength(255)
                     ->sortable()
                     ->hideFromIndex()
                     ->size('w-1/3'),

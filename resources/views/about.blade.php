@@ -31,8 +31,7 @@
         </section>
 
 
-        <!-- Company Description -->
-        <section class="max-w-[780px] mx-auto mb-[100px]">
+        <section class="max-w-[780px] mx-auto mb-[100px] text-justify about-content">
             {!! $about->main_info !!}
         </section>
     </main>

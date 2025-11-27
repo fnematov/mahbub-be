@@ -6,10 +6,12 @@
     <main class="max-w-[1920px] mx-auto pt-[60px] lg:pt-[100px] px-[20px] md:px-[60px] pb-[100px]">
         <!-- Header Section -->
         <section class="flex flex-col items-center gap-5 mb-[46px] mt-[48px]">
-            <h1 class="font-condensed font-bold text-[40px] lg:text-[60px] 2xl:text-[80px] leading-[1em] tracking-[-0.02em] text-black text-center m-0">
+            <h1
+                class="font-condensed font-bold text-[40px] lg:text-[60px] 2xl:text-[80px] leading-[1em] tracking-[-0.02em] text-black text-center m-0">
                 {{ __('messages.contact_header') }}
             </h1>
-            <p class="font-sans font-normal text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray text-center max-w-[780px] m-0">
+            <p
+                class="font-sans font-normal text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray text-center max-w-[780px] m-0">
                 {{ __('messages.contact_desc') }}
             </p>
         </section>
@@ -20,7 +22,8 @@
             <div class="w-full lg:w-[680px] flex-shrink-0">
                 <!-- Contact Info Card -->
                 <div class="bg-bg-gray rounded-[32px] p-6 sm:p-8 mb-6">
-                    <h2 class="font-condensed font-medium text-xl lg:text-2xl 2xl:text-[28px] leading-[1.071em] text-black mb-8 m-0">
+                    <h2
+                        class="font-condensed font-medium text-xl lg:text-2xl 2xl:text-[28px] leading-[1.071em] text-black mb-8 m-0">
                         {{ __('messages.more_info_contact') }}
                     </h2>
 
@@ -33,31 +36,32 @@
                                 <div class="flex items-start gap-2">
                                     <img src="{{asset('image/icons/phone.svg')}}" alt="">
                                     <div class="flex flex-col gap-1">
-                                    <span
-                                        class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{$contact->phone1}}</span>
+                                        <span
+                                            class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{$contact->phone1}}</span>
                                     </div>
                                 </div>
                                 @if($contact->phone2)
                                     <div class="flex items-start gap-2">
                                         <img src="{{asset('image/icons/phone.svg')}}" alt="">
                                         <div class="flex flex-col gap-1">
-                                        <span
-                                            class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{$contact->phone2}}</span>
+                                            <span
+                                                class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{$contact->phone2}}</span>
                                         </div>
                                     </div>
                                 @endif
                                 <div class="flex items-start gap-2">
                                     <img src="{{asset('image/icons/clock.svg')}}" alt="">
                                     <div class="flex flex-col gap-1">
-                                    <span
-                                        class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{Helper::getWorkingDays($contact->working_days)}}</span>
+                                        <span
+                                            class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{Helper::getWorkingDays($contact->working_days)}}</span>
                                     </div>
                                 </div>
                                 <div class="flex items-start gap-2">
                                     <img src="{{asset('image/icons/clock.svg')}}" alt="">
                                     <div class="flex flex-col gap-1">
-                                    <span
-                                        class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{$contact->from->format('H:i')}} – {{$contact->to->format('H:i')}}</span>
+                                        <span
+                                            class="font-sans font-medium text-base 2xl:text-lg leading-[1.333em] text-black">{{$contact->from->format('H:i')}}
+                                            – {{$contact->to->format('H:i')}}</span>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +71,8 @@
 
                 <!-- Office Address Card -->
                 <div class="bg-bg-gray rounded-[32px] p-6 sm:p-8">
-                    <h2 class="font-condensed font-medium text-xl lg:text-2xl 2xl:text-[28px] leading-[1.071em] text-black 2xl:mb-8 mb-6 m-0">
+                    <h2
+                        class="font-condensed font-medium text-xl lg:text-2xl 2xl:text-[28px] leading-[1.071em] text-black 2xl:mb-8 mb-6 m-0">
                         {{ __('messages.sales_office_address') }}
                     </h2>
 
@@ -122,29 +127,32 @@
                 }));
             d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
         })
-        ({key: "AIzaSyA6myHzS10YXdcazAFalmXvDkrYCp5cLc8", v: "weekly"});</script>
+        ({key: "{{ $settings->google_map_api_key ?? '' }}", v: "weekly"});</script>
 
     <script>
-
-        async function initMap() {
+        // Initialize maps for each address
+        async function initializeMaps() {
             const {Map} = await google.maps.importLibrary("maps");
-            map = new Map(document.getElementById("map"), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8,
+            const {AdvancedMarkerElement} = await google.maps.importLibrary("marker");
+
+            @foreach($addresses as $key => $address)
+            @if($address->location && isset($address->location['lat']) && isset($address->location['lng']))
+            const map{{ $key }} = new Map(document.getElementById("map{{ $key }}"), {
+                center: {lat: {{ $address->location['lat'] }}, lng: {{ $address->location['lng'] }}},
+                zoom: 15,
+                mapId: "map{{ $key }}"
             });
+
+            const marker{{ $key }} = new AdvancedMarkerElement({
+                map: map{{ $key }},
+                position: {lat: {{ $address->location['lat'] }}, lng: {{ $address->location['lng'] }}},
+                title: "{{ $address->address }}"
+            });
+            @endif
+            @endforeach
         }
 
-        initMap();
-
-        async function initMap2() {
-            const {Map} = await google.maps.importLibrary("maps");
-            map = new Map(document.getElementById("map2"), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8,
-            });
-        }
-
-        initMap2();
+        initializeMaps();
 
         const countEl = document.getElementById("touristCount");
         const textEl = document.getElementById("touristText");

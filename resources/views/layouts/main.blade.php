@@ -29,6 +29,7 @@
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/imask"></script>
+    <script src="{{asset('js/mobile-nav.js')}}"/>
 
     <script>
         tailwind.config = {
@@ -411,6 +412,5 @@
     });
 </script>
 @yield('scripts')
-<script src="{{resource_path('js/mobile-nav.js')}}"/>
 </body>
 </html>

@@ -49,8 +49,16 @@ class HomeController extends Controller
         })->whereNull('parent_id')->get();
         $faqs = QuestionAnswer::limit(10)->get();
 
-        return view('index', compact('tour_groups', 'services', 'partners',
-            'reviews', 'articles', 'faqs', 'countries', 'settings'));
+        return view('index', compact(
+            'tour_groups',
+            'services',
+            'partners',
+            'reviews',
+            'articles',
+            'faqs',
+            'countries',
+            'settings'
+        ));
     }
 
     public function tours()
@@ -91,7 +99,8 @@ class HomeController extends Controller
     {
         $contacts = Contact::all();
         $addresses = Address::all();
-        return view('contacts', compact('contacts', 'addresses'));
+        $settings = Settings::first();
+        return view('contacts', compact('contacts', 'addresses', 'settings'));
     }
 
     public function submitOrder(Request $request)

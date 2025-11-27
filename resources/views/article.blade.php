@@ -26,7 +26,7 @@
         <section class="max-w-[780px] mx-auto">
             <article
                 class="font-sans font-normal text-base xl:text-lg 2xl:text-xl leading-[1.4em] tracking-[0.01em] text-text-gray">
-                {!! nl2br(e($article->content)) !!}
+                {!! $article->content !!}
             </article>
         </section>
     </main>

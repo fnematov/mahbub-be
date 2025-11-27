@@ -16,9 +16,6 @@ class AboutUsFactory extends Factory
             'main_info_uz' => $this->faker->paragraph(),
             'main_info_ru' => $this->faker->paragraph(),
             'main_info_en' => $this->faker->paragraph(),
-            'add_info_uz' => $this->faker->optional()->paragraph(),
-            'add_info_ru' => $this->faker->optional()->paragraph(),
-            'add_info_en' => $this->faker->optional()->paragraph(),
         ];
     }
 

@@ -23,9 +23,10 @@ class Settings extends Model
         'contact_phone',
         'contact_email',
         'website_title',
+        'google_map_api_key',
     ];
 
-    protected array $localization = ['banner_title', 'banner_description'];
+    protected array $localized = ['banner_title', 'banner_description'];
 
     public function media(): MorphOne|Media
     {

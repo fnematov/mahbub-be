@@ -278,7 +278,8 @@
 
                     <div class="flex items-center gap-3">
                         <img src="./assets/icons/clock.svg" alt="clock icon">
-                        <span class="font-sans font-medium 2xl:text-lg text-base leading-[1.333em] text-black">{{ __('messages.24_7') }}</span>
+                        <span
+                            class="font-sans font-medium 2xl:text-lg text-base leading-[1.333em] text-black">{{ __('messages.24_7') }}</span>
                     </div>
                 </div>
             </aside>
