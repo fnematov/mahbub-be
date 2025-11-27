@@ -6,181 +6,34 @@
         <!-- Header Section -->
         <section class="flex flex-col items-center gap-5 mb-[48px] mt-[100px]">
             <h1 class="font-condensed font-bold text-[35px] sm:text-[55px] lg:text-[65px] 2xl:text-[80px] leading-[1em] tracking-[-0.02em] text-black text-center m-0">
-                Mahbub Tour
+                {{ __('messages.about_title') }}
             </h1>
             <p class="font-sans font-normal text-base lg:text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray text-center max-w-[780px] m-0">
-                Здесь вы можете полностью осведомлены о нашей деловой деятельности
+                {{ __('messages.about_desc') }}
             </p>
         </section>
         <!-- Certificates Section -->
         <section class="2xl:mb-[100px] mb-[60px]">
             <div
                 class="flex justify-center items-start gap-5 flex-wrap xl:flex-nowrap 2xl:max-w-[1200px] max-w-[1000px] mx-auto px-8">
-                <!-- Certificate 1 -->
-                <div class="flex flex-col items-center gap-5">
-                    <img src="./assets/tour.jpeg"
-                         class="object-cover w-[280px] lg:w-[320px] 2xl:w-[380px] 2xl:h-[491px] h-[350px] bg-bg-gray rounded-[32px] flex items-center justify-center">
-                    <h3 class="font-condensed font-bold text-[32px] leading-[1em] tracking-[-0.01em] text-black text-center m-0">
-                        Сертификат 1
-                    </h3>
-                </div>
-
-                <!-- Certificate 2 -->
-                <div class="flex flex-col items-center gap-5">
-                    <img src="./assets/tour.jpeg"
-                         class="object-cover w-[280px] lg:w-[320px] 2xl:w-[380px] 2xl:h-[491px] h-[350px] bg-bg-gray rounded-[32px] flex items-center justify-center">
-                    <h3 class="font-condensed font-bold text-[32px] leading-[1em] tracking-[-0.01em] text-black text-center m-0">
-                        Лицензия
-                    </h3>
-                </div>
-
-                <!-- Certificate 3 -->
-                <div class="flex flex-col items-center gap-5">
-                    <img src="./assets/tour.jpeg"
-                         class="object-cover w-[280px] lg:w-[320px] 2xl:w-[380px] 2xl:h-[491px] h-[350px] bg-bg-gray rounded-[32px] flex items-center justify-center">
-                    <h3 class="font-condensed font-bold text-[32px] leading-[1em] tracking-[-0.01em] text-black text-center m-0">
-                        Сертификат 2
-                    </h3>
-                </div>
+                @foreach($about->media as $media)
+                    <div class="flex flex-col items-center gap-5">
+                        <img src="{{url($media->path)}}"
+                             alt="{{$media->name}}"
+                             class="object-cover w-[280px] lg:w-[320px] 2xl:w-[380px] 2xl:h-[491px] h-[350px] bg-bg-gray rounded-[32px] flex items-center justify-center"
+                             onerror="this.style.display='none';">
+                        <h3 class="font-condensed font-bold text-[32px] leading-[1em] tracking-[-0.01em] text-black text-center m-0">
+                            {{ $media->name }}
+                        </h3>
+                    </div>
+                @endforeach
             </div>
         </section>
 
 
         <!-- Company Description -->
         <section class="max-w-[780px] mx-auto mb-[100px]">
-            <p class="font-sans font-normal text-base xl:text-lg 2xl:text-xl leading-[1.4em] tracking-[0.01em] text-text-gray m-0">
-                Компания GLOBAL CONNECT (Лицензия № Т-1077-15;<br>Сертификат № UZ.SMT.02.361.010216), расположенная в
-                Самарканде, Узбекистан, является профессиональным туроператором, занимающимся организацией
-                индивидуальных и групповых экскурсий.<br><br>Мы предлагаем широкий выбор туров, которые позволят вам
-                открыть для себя неповторимую красоту Узбекистана и цивилизацию Востока. Мы предлагаем лучшие
-                предложения по турпакетам, бронированию авиабилетов и железнодорожных билетов, а также качественное
-                обслуживание.<br><br>Наша команда профессионалов стремится в первую очередь к созданию туристического
-                продукта высочайшего качества, оперативной обработке заявок и созданию благоприятных условий для
-                сотрудничества.<br><br>Наше туристическое агентство понимает важность индивидуального подхода к каждому
-                клиенту. Путешествуя с нашим агентством, вы получаете первоклассный сервис и доступные цены.
-            </p>
-        </section>
-
-        <!-- Services Section -->
-        <section class="max-w-[780px] mx-auto mb-[100px]">
-            <h2 class="font-sans font-medium text-xl xl:text-2xl leading-[1.1666666666666667em] tracking-[0.01em] text-black mb-5 m-0">
-                Наши услуги:
-            </h2>
-            <div
-                class="font-sans font-normal text-base xl:text-lg 2xl:text-xl leading-[1.6em] tracking-[0.01em] text-text-gray">
-                <p class="m-0 mb-2">Визовая поддержка в Узбекистан - Письмо-приглашение (LOI);</p>
-                <p class="m-0 mb-2">Встреча в аэропорту и на вокзале, трансфер на желаемом транспорте с
-                    кондиционером;</p>
-                <p class="m-0 mb-2">Бронирование авиа- и железнодорожных билетов;</p>
-                <p class="m-0 mb-2">Бронирование отелей, хостелов и гостевых домов;</p>
-                <p class="m-0 mb-2">Экскурсия по мемориальным и архитектурным объектам;</p>
-                <p class="m-0 mb-2">Предоставление питания и организация питания на условиях полного (завтрак, обед,
-                    ужин) или полупансиона (завтрак и обед/ужин);</p>
-                <p class="m-0 mb-2">Предоставление квалифицированных услуг гидов и переводчиков;</p>
-                <p class="m-0 mb-2">Встреча с преподавателями вузов и организация конференций;</p>
-                <p class="m-0 mb-2">Организация выступлений национальных фольклорных коллективов Самарканда, Бухары и
-                    других городов Узбекистана;</p>
-                <p class="m-0 mb-2">Посещение национальных праздников и торжеств;</p>
-                <p class="m-0 mb-2">Треккинг, катание на верблюдах и встречи с кочевниками в пустыне;</p>
-                <p class="m-0 mb-2">Ознакомительные поездки на фабрики (ковров, керамики, вина и др.);</p>
-                <p class="m-0 mb-2">Все виды входных билетов на памятники, а также билеты в театр;</p>
-                <p class="m-0 mb-2">Организация конференций, конгрессов, семинаров и других мероприятий;</p>
-                <p class="m-0 mb-2">Бронирование помещений для проведения конференций, конгрессов, семинаров,
-                    симпозиумов;</p>
-                <p class="m-0 mb-2">Предоставление оборудования для проведения конференций;</p>
-                <p class="m-0">Позвоните или напишите нам, и мы поможем вам подобрать отдых.</p>
-            </div>
-        </section>
-
-        <!-- Visa Section -->
-        <section class="max-w-[780px] mx-auto mb-[100px]">
-            <h2 class="font-sans font-medium text-xl xl:text-[28px] 2xl:text-[32px] leading-[1.125em] tracking-[0.01em] text-black mb-4 m-0">
-                Виза Республики Узбекистан
-            </h2>
-
-            <h3 class="font-sans font-medium text-lg xl:text-xl 2xl:text-2xl leading-[1.3333333333333333em] tracking-[0.01em] text-black mb-4 m-0">
-                Правила оформления виз в Узбекистан
-            </h3>
-
-            <div
-                class="font-sans font-normal text-base xl:text-lg 2xl:text-xl leading-[1.4em] tracking-[0.01em] text-text-gray">
-                <p class="m-0 mb-4">
-                    В соответствии с законодательством Республики Узбекистан иностранные граждане и лица без гражданства
-                    могут въезжать в Узбекистан или транзитом проезжать через его территорию только на основании
-                    въездных виз.
-                </p>
-
-                <p class="m-0 mb-4">
-                    Иностранные граждане и лица без гражданства могут получить визы в дипломатических представительствах
-                    и консульских учреждениях Республики Узбекистан за рубежом на основании визовой поддержки
-                    (подтверждения Министерства иностранных дел Республики Узбекистан).
-                </p>
-
-                <p class="m-0 mb-4">
-                    Визовая поддержка выдается на основании ходатайства приглашающей организации, компании и лиц,
-                    постоянно или временно проживающих в Узбекистане, поданного в Министерство иностранных дел
-                    Республики Узбекистан.
-                </p>
-
-                <p class="m-0 mb-4">
-                    <strong>Перечень необходимых документов для приглашения иностранных граждан организациями и
-                        компаниями:</strong>
-                </p>
-
-                <ul class="list-disc list-inside mb-4 space-y-2">
-                    <li>Визовое заявление, оформленное на имя руководителя организации или компании;</li>
-                    <li>Электронная анкета с сайта evisa.mfa.uz;</li>
-                    <li>Копии паспортов приглашаемого лица, руководителя организации, уполномоченного лица организации
-                        на подачу документов;
-                    </li>
-                    <li>Копии документов организации (лицензия, сертификат и т.д.);</li>
-                    <li>Копии приказов руководителя и уполномоченного лица;</li>
-                    <li>Копия доверенности на уполномоченное лицо;</li>
-                    <li>Для оформления визы по прибытию в аэропорту «Ташкент» необходимо предоставить копии билетов;
-                    </li>
-                    <li>Справка с места работы приглашаемого лица.</li>
-                </ul>
-
-                <p class="m-0 mb-4">
-                    <strong>Перечень необходимых документов для приглашения иностранцев лицами:</strong>
-                </p>
-
-                <ul class="list-disc list-inside mb-4 space-y-2">
-                    <li>Визовая анкета;</li>
-                    <li>Электронная анкета с сайта evisa.mfa.uz;</li>
-                    <li>Копии паспортов приглашаемого и приглашающего лица;</li>
-                    <li>Оригинал приглашения, выданного органами внутренних дел Узбекистана;</li>
-                    <li>Копии документов, подтверждающих родство приглашаемого и приглашающего лица;</li>
-                    <li>Для оформления визы по прибытию в аэропорту «Ташкент» необходимо предоставить копии билетов.
-                    </li>
-                </ul>
-
-                <p class="m-0 mb-4">
-                    Срок рассмотрения визового заявления составляет до 10 рабочих дней при условии подачи документов в
-                    установленном порядке.
-                </p>
-
-                <p class="m-0 mb-4">
-                    <strong>Для оформления визы иностранные граждане и лица без гражданства должны предоставить в
-                        дипломатическое представительство или консульское учреждение Республики Узбекистан за рубежом
-                        следующие документы:</strong>
-                </p>
-
-                <ul class="list-disc list-inside mb-4 space-y-2">
-                    <li>паспорт или документ лица без гражданства, срок действия которого должен превышать срок действия
-                        визы не менее чем на 3 месяца;
-                    </li>
-                    <li>2 копии надлежащим образом заполненной визовой анкеты;</li>
-                    <li>2 цветные фотографии паспортного размера.</li>
-                </ul>
-
-                <p class="m-0">
-                    Для оформления транзитной визы иностранные граждане и лица без гражданства, помимо вышеуказанных
-                    документов, должны иметь визу страны конечного следования и проездные документы с подтвержденной
-                    датой выезда из Республики Узбекистан. В этом случае срок рассмотрения визового заявления составляет
-                    3 рабочих дня.
-                </p>
-            </div>
+            {!! $about->main_info !!}
         </section>
     </main>
 @endsection

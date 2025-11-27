@@ -7,10 +7,10 @@
         <!-- Header Section -->
         <section class="flex flex-col items-center gap-5 mb-[46px] mt-[48px]">
             <h1 class="font-condensed font-bold text-[40px] lg:text-[60px] 2xl:text-[80px] leading-[1em] tracking-[-0.02em] text-black text-center m-0">
-                Контакты
+                {{ __('messages.contact_header') }}
             </h1>
             <p class="font-sans font-normal text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray text-center max-w-[780px] m-0">
-                Отправьте запрос и мы свяжемся с вами в ближайшее время
+                {{ __('messages.contact_desc') }}
             </p>
         </section>
 
@@ -21,7 +21,7 @@
                 <!-- Contact Info Card -->
                 <div class="bg-bg-gray rounded-[32px] p-6 sm:p-8 mb-6">
                     <h2 class="font-condensed font-medium text-xl lg:text-2xl 2xl:text-[28px] leading-[1.071em] text-black mb-8 m-0">
-                        Для получения дополнительной информации вы можете связаться с нами
+                        {{ __('messages.more_info_contact') }}
                     </h2>
 
                     @foreach($contacts as $contact)
@@ -68,7 +68,7 @@
                 <!-- Office Address Card -->
                 <div class="bg-bg-gray rounded-[32px] p-6 sm:p-8">
                     <h2 class="font-condensed font-medium text-xl lg:text-2xl 2xl:text-[28px] leading-[1.071em] text-black 2xl:mb-8 mb-6 m-0">
-                        Адрес офис продаж
+                        {{ __('messages.sales_office_address') }}
                     </h2>
 
                     <div class="">
@@ -93,10 +93,10 @@
             <aside class="w-full lg:w-[380px] flex-shrink-0 lg:sticky lg:top-[100px]">
                 <div class="bg-bg-gray rounded-[32px] p-6">
                     <h3 class="font-sans font-medium text-lg 2xl:text-xl leading-[1.2em] text-black 2xl:mb-6 mb-4 m-0">
-                        Оставить запрос
+                        {{ __('messages.leave_request') }}
                     </h3>
 
-                    <x-form button-text="Отправить"/>
+                    <x-form button-text="{{ __('messages.send') }}"/>
                 </div>
             </aside>
         </div>

@@ -17,14 +17,14 @@
             >
                 <label
                     class="font-normal text-sm 2xl:text-base leading-4 tracking-[0.01em] text-light-gray"
-                >Направления</label
+                >{{ __('messages.directions') }}</label
                 >
                 <div class="flex justify-between items-center gap-1">
                     <select
                         class="focus:outline-none w-full -ml-1 font-medium text-lg 2xl:text-xl"
                         name="location"
                     >
-                        <option value="">Все направления</option>
+                        <option value="">{{ __('messages.all_directions') }}</option>
                         @foreach($countries as $country)
                             <option value="{{$country->id}}"
                                 {{ request('location') == $country->id ? 'selected' : '' }}>
@@ -39,14 +39,14 @@
             >
                 <label
                     class="font-normal text-sm 2xl:text-base leading-4 tracking-[0.01em] text-light-gray"
-                >Месяц</label
+                >{{ __('messages.month') }}</label
                 >
                 <div class="flex justify-between items-center gap-1">
                     <select
                         class="focus:outline-none w-full -ml-1 font-medium text-lg 2xl:text-xl"
                         name="month"
                     >
-                        <option value="">Любые ближайшие месяцы</option>
+                        <option value="">{{ __('messages.any_coming_months') }}</option>
                         @foreach(Helper::getMonths() as $key => $months)
                             <option value="{{$key}}"
                                 {{ request('month') !== null && request('month') === (string)$key ? 'selected' : '' }}>
@@ -59,7 +59,7 @@
             <button
                 class="2xl:px-8 2xl:py-4 px-5 py-3 bg-primary-green border-none rounded-[20px] font-medium text-base xl:text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-white cursor-pointer whitespace-nowrap hover:bg-[#067a47] transition-colors mt-4 md:mt-0 w-full md:w-[160px] lg:w-[240px] 2xl:h-[68px] xl:h-[58px] h-[52px] flex items-center justify-center"
             >
-                Подобрать
+                {{ __('messages.pick_up') }}
             </button>
         </form>
     </div>
@@ -110,12 +110,12 @@
                                 <p
                                     class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
                                 >
-                                    {{$tour->days_count}} дней - {{$tour->nights_count}} ночей
+                                    {{$tour->days_count}} {{ __('messages.day') }} - {{$tour->nights_count}} {{ __('messages.nights') }}
                                 </p>
                                 <div class="flex items-center gap-1.5">
                   <span
                       class="font-sans font-normal text-base xl:text-base 2xl:text-lg leading-[1.111em] text-text-gray"
-                  >От</span
+                  >{{ __('messages.from') }}</span
                   >
                                     <span
                                         class="font-sans font-semibold text-base xl:text-lg 2xl:text-xl leading-[1.2em] text-primary-green"
@@ -127,7 +127,7 @@
                                 href="{{route('tours.show', $tour)}}"
                                 class="absolute bottom-6 right-6 px-4 py-2 2xl:px-8 2xl:py-4 text-sm xl:text-base 2xl:text-xl bg-white border-none rounded-2xl font-medium leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
                             >
-                                Подробнее
+                                {{ __('messages.details') }}
                             </a>
                         </div>
                     </div>

@@ -19,22 +19,22 @@
     @endif
 
     {{-- Name --}}
-    <x-input.label title="Имя" required>
+    <x-input.label title="{{ __('messages.name') }}" required>
         <input type="text" name="name" value="{{old('name')}}" maxlength="100" class="w-full focus:outline-none"
-               placeholder="Введите ваше имя">
+               placeholder="{{ __('messages.enter_name') }}">
     </x-input.label>
 
     {{-- Phone --}}
-    <x-input.label title="Телефон" required>
+    <x-input.label title="{{ __('messages.phone') }}" required>
         <input type="tel" name="phone" value="{{old('phone')}}" maxlength="19" class="w-full focus:outline-none"
                placeholder="+998 (__) ___ __ __">
     </x-input.label>
 
     {{-- Month selector (optional) --}}
     @if ($showMonth)
-        <x-input.label title="Месяц отбытия">
+        <x-input.label title="{{ __('messages.month_departure') }}">
             <select class="w-full focus:outline-none -ml-1" name="month">
-                <option value="">Любые ближайшие месяцы</option>
+                <option value="">{{ __('messages.any_month') }}</option>
                 @foreach(Helper::getMonths() as $key => $months)
                     <option value="{{ $key }}" {{ old('month') == $key ? 'selected' : '' }}>
                         {{ $months }}
@@ -45,10 +45,10 @@
     @endif
 
     {{-- Adults counter --}}
-    <x-counter title="Количество взрослых" id="adult_count" text="взрослых" default="{{old('adult_count') ?? 2}}"/>
+    <x-counter title="{{ __('messages.adults_count') }}" id="adult_count" text="{{ __('messages.adults') }}" default="{{old('adult_count') ?? 2}}"/>
 
     {{-- Children counter --}}
-    <x-counter title="Количество детей" id="child_count" text="ребенок" default="{{old('child_count') ?? 1}}"/>
+    <x-counter title="{{ __('messages.children_count') }}" id="child_count" text="{{ __('messages.child') }}" default="{{old('child_count') ?? 1}}"/>
 
     {{-- Submit button --}}
     {{-- ERRORS --}}

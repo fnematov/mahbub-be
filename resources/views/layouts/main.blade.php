@@ -119,14 +119,18 @@
     <nav class="mt-12 flex flex-col gap-5">
         <a href="{{route('home')}}"
            class="text-lg font-medium {{request()->routeIs('home') ? 'text-primary-green' : ''}}"
-        >Главная</a
+        >{{ __('messages.home') }}</a
+        >
+        <a href="{{route('about')}}"
+           class="text-lg font-medium {{request()->routeIs('about') ? 'text-primary-green' : ''}}"
+        >{{ __('messages.about') }}</a
         >
         <a href="{{route('tours')}}"
-           class="text-lg font-medium" {{request()->routeIs('tours*') ? 'text-primary-green' : ''}}>Туры</a>
+           class="text-lg font-medium" {{request()->routeIs('tours*') ? 'text-primary-green' : ''}}>{{ __('messages.tours') }}</a>
         <a href="{{route('articles')}}"
-           class="text-lg font-medium {{request()->routeIs('articles*') ? 'text-primary-green' : ''}}">Статьи</a>
+           class="text-lg font-medium {{request()->routeIs('articles*') ? 'text-primary-green' : ''}}">{{ __('messages.articles') }}</a>
         <a href="{{route('contacts')}}"
-           class="text-lg font-medium {{request()->routeIs('contacts') ? 'text-primary-green' : ''}}">Контакты</a>
+           class="text-lg font-medium {{request()->routeIs('contacts') ? 'text-primary-green' : ''}}">{{ __('messages.contacts') }}</a>
     </nav>
 </div>
 
@@ -162,21 +166,26 @@
             <a
                 href="{{route('home')}}"
                 class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('home') ? 'text-primary-green' : ''}}"
-            >Главная</a
+            >{{ __('messages.home') }}</a
+            >
+            <a
+                href="{{route('about')}}"
+                class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('about') ? 'text-primary-green' : ''}}"
+            >{{ __('messages.about') }}</a
             >
             <a
                 href="{{route('tours')}}"
                 class="font-medium text-base leading-6 tracking-[0.01em] no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('tours*') ? 'text-primary-green' : ''}}"
-            >Туры</a
+            >{{ __('messages.tours') }}</a
             >
             <a
                 href="{{route('articles')}}"
                 class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('articles*') ? 'text-primary-green' : ''}}"
-            >Статьи</a>
+            >{{ __('messages.articles') }}</a>
             <a
                 href="{{route('contacts')}}"
                 class="font-medium text-base leading-6 tracking-[0.01em] text-black no-underline whitespace-nowrap hover:opacity-70 transition-opacity {{request()->routeIs('contacts') ? 'text-primary-green' : ''}}"
-            >Контакты</a
+            >{{ __('messages.contacts') }}</a
             >
         </div>
 
@@ -246,8 +255,8 @@
         text.classList.toggle("line-clamp-4");
 
         btn.innerText = text.classList.contains("line-clamp-4")
-            ? "Читать полностью"
-            : "Скрыть";
+            ? "{{ __('messages.read_full') }}"
+            : "{{ __('messages.hide') }}";
     }
 
     // Initialize Tours Swiper

@@ -25,19 +25,18 @@
             <h1
                 class="font-condensed font-bold text-[36px] lg:text-[60px] 2xl:text-[clamp(48px,6.25vw,120px)] leading-[1em] tracking-[-0.02em] text-black w-full m-0"
             >
-                Добро пожаловать<br/>в Узбекистан
+                {!! __('messages.welcome_title') !!}
             </h1>
             <p
                 class="font-sans font-normal text-[clamp(16px,1.25vw,20px)] leading-[1.2em] tracking-[0.01em] text-text-gray max-w-[520px] m-0"
             >
-                Найдите свой идеальный путешествие с легкостью и забронируйте ваш тур
-                прямо сейчас
+                {{ __('messages.welcome_subtitle') }}
             </p>
             <a
                 href="{{route('tours')}}"
                 class="px-6 py-3 2xl:px-8 2xl:py-4 bg-white border-none rounded-2xl font-medium 2xl:text-xl text-lg leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
             >
-                Посмотреть все туры
+                {{ __('messages.view_all_tours') }}
             </a>
         </div>
 
@@ -51,11 +50,11 @@
             >
                 <div class="flex-1 flex flex-col gap-1 px-4 py-2 border-r border-border-gray min-w-0">
                     <label class="font-normal text-sm 2xl:text-base leading-4 tracking-[0.01em] text-light-gray">
-                        Направления
+                        {{ __('messages.directions') }}
                     </label>
                     <div class="flex justify-between items-center gap-1">
                         <select name="location" class="focus:outline-none w-full -ml-1 font-medium text-lg 2xl:text-xl">
-                            <option value="">Выберите направление</option>
+                            <option value="">{{ __('messages.select_direction') }}</option>
                             @foreach($countries as $country)
                                 <option value="{{$country->id}}"
                                     {{ request('location') == $country->id ? 'selected' : '' }}>
@@ -67,11 +66,11 @@
                 </div>
                 <div class="flex-1 flex flex-col gap-1 px-4 py-2 border-r border-border-gray min-w-0">
                     <label class="font-normal text-sm 2xl:text-base leading-4 tracking-[0.01em] text-light-gray">
-                        Месяц
+                        {{ __('messages.month') }}
                     </label>
                     <div class="flex justify-between items-center gap-1">
                         <select name="month" class="focus:outline-none w-full -ml-1 font-medium text-lg 2xl:text-xl">
-                            <option value="">Любые ближайшие месяцы</option>
+                            <option value="">{{ __('messages.any_month') }}</option>
                             @foreach(Helper::getMonths() as $key => $months)
                                 <option value="{{$key}}"
                                     {{ request('month') === $key ? 'selected' : '' }}>
@@ -83,7 +82,7 @@
                 </div>
                 <button
                     class="px-8 py-4 bg-primary-green border-none rounded-[20px] font-medium text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-white cursor-pointer whitespace-nowrap hover:bg-[#067a47] transition-colors max-md:w-full max-md:mt-2">
-                    Найти
+                    {{ __('messages.find') }}
                 </button>
             </form>
         </div>
@@ -118,7 +117,7 @@
                         href="{{$service->url}}"
                         class="py-4 px-8 bg-white border-none rounded-2xl font-medium 2xl:text-xl text-base leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] transition-colors"
                     >
-                        Исследуйте больше
+                        {{ __('messages.explore_more') }}
                     </a>
                 </div>
             </div>
@@ -204,12 +203,12 @@
                                                 <p
                                                     class="font-sans font-normal md:text-lg text-base leading-[1.333em] text-text-gray m-0"
                                                 >
-                                                    {{$tour->days_count}} дней - {{$tour->nights_count}} ночей
+                                                    {{$tour->days_count}} {{ __('messages.days') }} - {{$tour->nights_count}} {{ __('messages.nights') }}
                                                 </p>
                                                 <div class="flex items-center gap-1.5">
                         <span
                             class="font-sans font-normal text-base md:text-lg leading-[1.111em] text-text-gray"
-                        >От</span
+                        >{{ __('messages.from') }}</span
                         >
                                                     <span
                                                         class="font-sans font-semibold text-base md:text-xl leading-[1.2em] text-primary-green"
@@ -221,7 +220,7 @@
                                                 href="{{route('tours.show', $tour)}}"
                                                 class="md:absolute mt-2 bottom-6 right-6 2xl:px-8 2xl:py-4 xl:px-6 xl:py-3 py-2 px-4 bg-white border-none rounded-2xl font-medium 2xl:text-xl xl:text-lg text-base leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#f5f5f5] hover:-translate-y-0.5 transition-all"
                                             >
-                                                Подробнее
+                                                {{ __('messages.details') }}
                                             </a>
                                         </div>
                                     </div>
@@ -242,13 +241,12 @@
             <h2
                 class="font-condensed font-bold text-[40px] xl:text-[50px] 2xl:text-[clamp(48px,4.167vw,80px)] leading-[1em] tracking-[-0.02em] text-black m-0"
             >
-                Нам доверяют
+                {{ __('messages.trusted_by') }}
             </h2>
             <p
                 class="font-sans font-normal text-base 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0"
             >
-                Многие партнеры доверяет нам за наш многолетний опыт и деловую
-                активность
+                {{ __('messages.trusted_by_desc') }}
             </p>
         </div>
 
@@ -271,12 +269,12 @@
             <h2
                 class="font-condensed font-bold text-[40px] xl:text-[50px] 2xl:text-[clamp(48px,4.167vw,80px)] leading-[1em] tracking-[-0.02em] text-black m-0"
             >
-                Отзывы туристов
+                {{ __('messages.tourist_reviews') }}
             </h2>
             <p
                 class="font-sans font-normal text-base 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0"
             >
-                Слова похвалы наших туристов о нашем деятельности
+                {{ __('messages.tourist_reviews_desc') }}
             </p>
         </div>
 
@@ -308,7 +306,7 @@
                                     class="text-primary-green text-sm mt-1"
                                     onclick="toggleReview(this)"
                                 >
-                                    Читать полностью
+                                    {{ __('messages.read_full') }}
                                 </button>
                             </div>
                             <div class="flex justify-between items-center mt-auto pt-2">
@@ -339,19 +337,19 @@
             <h2
                 class="font-condensed font-bold text-[40px] xl:text-[50px] 2xl:text-[clamp(48px,4.167vw,80px)] leading-[1em] tracking-[-0.02em] text-black m-0"
             >
-                Поделимся нашим опытом
+                {{ __('messages.share_experience') }}
             </h2>
             <p
                 class="font-sans font-normal text-base 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0"
             >
-                Мы заранее подобрали для вас готовые туры по вашему настроению
+                {{ __('messages.share_experience_desc') }}
             </p>
             <!-- Articles Button -->
             <a
                 href="{{route('articles')}}"
                 class="lg:absolute right-0 bottom-0 flex items-center gap-2 px-8 py-4 bg-bg-gray border border-bg-gray rounded-2xl font-medium text-xl leading-[1.2em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#e8e8e8] transition-colors"
             >
-                К статьям
+                {{ __('messages.to_articles') }}
                 <svg
                     width="24"
                     height="24"
@@ -417,13 +415,12 @@
             <h2
                 class="lg:whitespace-nowrap font-condensed font-bold text-[clamp(48px,4.167vw,80px)] leading-[1em] tracking-[-0.02em] text-black m-0"
             >
-                Есть вопросы? У нас есть ответы.
+                {{ __('messages.have_questions') }}
             </h2>
             <p
                 class="font-sans font-normal max-w-[90%] text-xl leading-[1.2em] tracking-[0.01em] text-text-gray m-0"
             >
-                Вы можете найти ответы на часто задаваемые вопросы или обратитесь в
-                службу поддержки
+                {{ __('messages.have_questions_desc') }}
             </p>
         </div>
 

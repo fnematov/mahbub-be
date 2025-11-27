@@ -21,7 +21,7 @@
                         </h1>
                         <p class="font-sans font-normal text-xs lg:text-sm 2xl:text-base tracking-[0.01em] text-text-gray m-0">
                             {{$tour->location?->name}}, {{$tour->location?->parent?->name}} | <span
-                                class="text-primary-green">{{$tour->days_count}} дней - {{$tour->nights_count}} ночей</span>
+                                class="text-primary-green">{{$tour->days_count}} {{ __('messages.day') }} - {{$tour->nights_count}} {{ __('messages.nights') }}</span>
                         </p>
                     </div>
                 </div>
@@ -30,9 +30,9 @@
                 <div class="mb-3 max-sm:w-full">
                     <div
                         class="w-full flex items-center justify-center gap-3 px-5 py-4 2xl:px-6 2xl:py-5 bg-bg-gray rounded-[32px] font-medium text-base 2xl:text-lg leading-[1.333em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#e8e8e8] transition-colors">
-                        <span>Цена: от</span>
+                        <span>{{ __('messages.price_from') }}</span>
                         <span class="font-semibold text-primary-green">${{$tour->price_child}}</span>
-                        <span>до</span>
+                        <span>{{ __('messages.to') }}</span>
                         <span class="font-semibold text-primary-green">${{$tour->price_adult}}</span>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                     <button
                         class="w-full flex items-center justify-center gap-2 px-5 py-4 2xl:px-6 2xl:py-5 bg-bg-gray rounded-[32px] font-medium text-base 2xl:text-lg leading-[1.333em] tracking-[0.01em] text-black cursor-pointer hover:bg-[#e8e8e8] transition-colors">
                         <img src="{{asset('image/icons/ShareFat.svg')}}" alt="">
-                        <span class="hidden sm:block">Поделиться</span>
+                        <span class="hidden sm:block">{{ __('messages.share') }}</span>
                     </button>
                 </div>
             </div>
@@ -82,19 +82,19 @@
                         <button
                             class="flex-1 px-4 py-3 bg-white rounded-[14px] shadow-[0px_1px_4px_0px_rgba(0,0,0,0.1),0px_6px_12px_0px_rgba(0,0,0,0.05)] font-medium text-xs sm:text-sm md:text-base leading-[1.2em] text-black cursor-pointer transition-all active-tab"
                             onclick="switchTab('info')">
-                            Информация о туре
+                            {{ __('messages.tour_info') }}
                         </button>
                         <div class="w-px h-6 bg-border-gray"></div>
                         <button
                             class="flex-1 px-4 py-3 bg-transparent rounded-[14px] font-medium text-xs sm:text-sm md:text-base leading-[1.2em] text-text-gray cursor-pointer transition-all hover:text-black"
                             onclick="switchTab('route')">
-                            Маршрут тура
+                            {{ __('messages.tour_route') }}
                         </button>
                         <div class="w-px h-6 bg-border-gray"></div>
                         <button
                             class="flex-1 px-4 py-3 bg-transparent rounded-[14px] font-medium text-xs sm:text-sm md:text-base leading-[1.2em] text-text-gray cursor-pointer transition-all hover:text-black"
                             onclick="switchTab('reviews')">
-                            Отзывы туристов
+                            {{ __('messages.tourist_reviews') }}
                         </button>
                     </div>
                 </section>
@@ -116,7 +116,7 @@
                                     onclick="toggleRouteDay(this)">
                                         <span class="text-lg 2xl:text-xl m-0">
                                           <span class="font-condensed font-medium text-black text-2xl">
-                                              {{$key+1}} день:
+                                              {{$key+1}} {{ __('messages.day') }}:
                                           </span>
                                           {{$route->name}}
                                         </span>
@@ -139,7 +139,7 @@
                     <div id="reviewsTab" class="tab-content hidden mb-4">
                         @if($tour->reviews->count() > 0)
                             <h2 class="font-condensed font-medium text-3xl 2xl:text-[36px] leading-[1em] tracking-[-0.01em] text-black mb-6 m-0">
-                                Отзывы туристов ({{$tour->reviews->count()}})
+                                {{ __('messages.tourist_reviews') }} ({{$tour->reviews->count()}})
                             </h2>
 
                             <div class="space-y-12 mb-[120px]">
@@ -169,10 +169,10 @@
                         @else
                             <div class="mb-[120px] text-center py-16">
                                 <h2 class="font-condensed font-medium text-3xl 2xl:text-[36px] leading-[1em] tracking-[-0.01em] text-black mb-4">
-                                    Отзывов пока нет
+                                    {{ __('messages.no_reviews') }}
                                 </h2>
                                 <p class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] tracking-[0.01em] text-text-gray">
-                                    Станьте первым, кто оставит отзыв о туре!
+                                    {{ __('messages.be_first_review') }}
                                 </p>
                             </div>
                         @endif
@@ -187,12 +187,12 @@
                             @csrf
                             <input type="hidden" name="tour_id" value="{{$tour->id}}">
                             <h3 class="font-condensed font-medium text-3xl 2xl:text-4xl leading-[1em] tracking-[-0.01em] text-black mb-6 m-0">
-                                Оставить отзыв
+                                {{ __('messages.leave_review') }}
                             </h3>
                             <div class="mb-6">
                                 <label
                                     class="block font-normal text-[13px]/[16px] tracking-[0.01em] text-label-gray mb-2">
-                                    Оценка <span class="text-required-label">*</span>
+                                    {{ __('messages.rating') }} <span class="text-required-label">*</span>
                                 </label>
 
                                 <!-- Stars -->
@@ -207,19 +207,19 @@
                                 class="w-full 2xl:px-5 2xl:py-2 py-1 px-5 bg-bg-gray mb-4 rounded-xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
                                 <label
                                     class="block font-normal 2xl:text-[13px]/[16px] text-[11px]/[14px] tracking-[0.01em] text-label-gray">
-                                    Имя
+                                    {{ __('messages.name') }}
                                     <span class="text-required-label">*</span>
                                 </label>
                                 <input type="text" name="full_name" value="{{old('full_name')}}" maxlength="100"
                                        class="focus:outline-none 2xl:text-base text-sm bg-transparent w-full"
-                                       placeholder="Введите ваше имя">
+                                       placeholder="{{ __('messages.enter_name') }}">
                             </div>
 
                             <div
                                 class="w-full 2xl:px-5 2xl:py-2 py-1 px-5 bg-bg-gray mb-4 rounded-xl border-none font-normal text-base text-black focus:ring-2 focus:ring-primary-green">
                                 <label
                                     class="block font-normal 2xl:text-[13px]/[16px] text-[11px]/[14px] tracking-[0.01em] text-label-gray">
-                                    Телефон
+                                    {{ __('messages.phone') }}
                                     <span class="text-required-label">*</span>
                                 </label>
                                 <input type="tel" name="phone" value="{{old('phone')}}" maxlength="19"
@@ -229,7 +229,7 @@
                             <div class="bg-bg-gray rounded-xl p-5 min-h-[240px]">
                                 <textarea name="comment_ru"
                                           class="w-full h-full bg-transparent border-none outline-none resize-none font-sans font-normal 2xl:text-lg text-base leading-[1.333em] tracking-[0.01em] text-black placeholder-text-gray"
-                                          placeholder="Напишите ваш отзыв здесь..."
+                                          placeholder="{{ __('messages.write_review_placeholder') }}"
                                           rows="10"
                                 >{{old('comment_ru')}}</textarea>
                             </div>
@@ -245,7 +245,7 @@
                             @endif
                             <button type="submit"
                                     class="mt-4 w-full 2xl:px-8 2xl:py-4 py-3 bg-primary-green border-none rounded-2xl font-medium 2xl:text-xl text-lg leading-[1.2em] tracking-[0.01em] text-white cursor-pointer hover:bg-[#067a47] transition-colors">
-                                Отправить
+                                {{ __('messages.submit') }}
                             </button>
                         </form>
                     </div>
@@ -259,16 +259,16 @@
                 <!-- Booking Form -->
                 <div class="bg-bg-gray rounded-[32px] p-6 mb-3">
                     <h3 class="font-sans font-medium text-lg 2xl:text-xl leading-[1.2em] text-black mb-6 m-0">
-                        Забронировать место
+                        {{ __('messages.book_place') }}
                     </h3>
 
-                    <x-form button-text="Забронировать" tour_id="{{$tour->id}}"/>
+                    <x-form button-text="{{ __('messages.book') }}" tour_id="{{$tour->id}}"/>
                 </div>
 
                 <!-- Contact Info -->
                 <div class="bg-bg-gray rounded-[32px] p-6">
                     <p class="font-sans font-medium 2xl:text-xl tex-lg leading-[1.2em] text-black mb-6 m-0">
-                        Для получения дополнительной информации свяжитесь с нами
+                        {{ __('messages.contact_for_info') }}
                     </p>
 
                     <div class="flex items-center gap-3 mb-4">
@@ -278,7 +278,7 @@
 
                     <div class="flex items-center gap-3">
                         <img src="./assets/icons/clock.svg" alt="clock icon">
-                        <span class="font-sans font-medium 2xl:text-lg text-base leading-[1.333em] text-black">24/7 на связи</span>
+                        <span class="font-sans font-medium 2xl:text-lg text-base leading-[1.333em] text-black">{{ __('messages.24_7') }}</span>
                     </div>
                 </div>
             </aside>

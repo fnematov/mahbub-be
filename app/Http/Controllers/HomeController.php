@@ -138,4 +138,10 @@ class HomeController extends Controller
         return back()
             ->with('success', __('messages.review_created'));
     }
+
+    public function about()
+    {
+        $about = \App\Models\AboutUs::with('media')->first();
+        return view('about', compact('about'));
+    }
 }

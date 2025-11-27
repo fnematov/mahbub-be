@@ -8,6 +8,7 @@ Route::group([
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
 ], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/about', [HomeController::class, 'about'])->name('about');
     Route::get('/tours', [HomeController::class, 'tours'])->name('tours');
     Route::get('/tours/{tour}', [HomeController::class, 'tour'])->name('tours.show');
     Route::get('/articles', [HomeController::class, 'articles'])->name('articles');

@@ -5,10 +5,10 @@
         <!-- Header Section -->
         <section class="flex flex-col items-center gap-5 mb-[100px] mt-[48px]">
             <h1 class="font-condensed font-bold text-[35px] 2xl:text-[50px] lg:text-[60px] 2xl:text-[80px] leading-[1em] tracking-[-0.02em] text-black text-center m-0">
-                Статьи и новости о туризме
+                {{ __('messages.articles_news_title') }}
             </h1>
             <p class="font-sans font-normal text-base xl:text-lg 2xl:text-xl leading-[1.2em] tracking-[0.01em] text-text-gray text-center max-w-[780px] m-0">
-                Вы здесь можете узнать больше о путешествие и лайфхаков
+                {{ __('messages.articles_news_desc') }}
             </p>
         </section>
 
