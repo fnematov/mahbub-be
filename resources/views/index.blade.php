@@ -376,7 +376,8 @@
         >
             <!-- Article Card 1 -->
             @foreach($articles as $article)
-                <div
+                <a
+                    href="{{route('articles.show', $article->id)}}"
                     class="w-full max-w-[435px] bg-bg-gray rounded-[32px] overflow-hidden relative flex flex-col"
                 >
                     <img
@@ -401,7 +402,7 @@
                             {{$article->created_at->translatedFormat('d F Y')}}
                         </p>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </section>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ReviewStatusEnum;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Contact;
@@ -27,7 +28,11 @@ class HomeController extends Controller
             ->get();
         $services = Services::limit(2)->orderBy('id')->get();
         $partners = Partner::all();
-        $reviews = Review::with('tour')->where('rating', '>=', 4)->limit(10)->get();
+        $reviews = Review::with('tour')
+            ->whereStatus(ReviewStatusEnum::ACTIVE)
+            ->where('rating', '>=', 4)
+            ->limit(10)
+            ->get();
         $articles = Article::with('media')
             ->active()
             ->limit(4)
