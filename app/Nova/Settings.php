@@ -25,10 +25,6 @@ class Settings extends Resource
         return [
             ID::make()->sortable()->hide(),
 
-            Image::make('изображения', 'media.path_ru')
-                ->onlyOnIndex(),
-
-
             MorphOne::make('Загрузка изображения', 'media', SettingsMedia::class)
                 ->required()
                 ->hideFromIndex()
@@ -92,6 +88,9 @@ class Settings extends Resource
                     ->size('w-1/3'),
 
             ]),
+
+            Image::make('изображения', 'media.path_ru')
+                ->onlyOnIndex(),
         ];
     }
 }
