@@ -11,7 +11,6 @@ use App\Models\Order;
 use App\Models\Partner;
 use App\Models\QuestionAnswer;
 use App\Models\Review;
-use App\Models\Services;
 use App\Models\Settings;
 use App\Models\Tour;
 use App\Models\TourGroup;
@@ -37,7 +36,6 @@ class DatabaseSeeder extends Seeder
         Contact::factory()->count(5)->create();
         Address::factory()->create();
         QuestionAnswer::factory()->count(20)->create();
-        Services::factory()->count(15)->create();
         Order::factory()->count(15)->create();
         Review::factory()->count(15)->create();
         Partner::factory()->count(10)->create();
@@ -46,6 +44,10 @@ class DatabaseSeeder extends Seeder
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+        ]);
+
+        $this->call([
+            ServicesSeeder::class
         ]);
     }
 }

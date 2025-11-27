@@ -28,7 +28,7 @@ class ArticleFactory extends Factory
         ];
     }
 
-    public function configure(): ServicesFactory|Factory
+    public function configure(): Factory
     {
         return $this->afterCreating(function (Article $services) {
             Media::factory(mt_rand(1, 5))->create(['model_id' => $services->id, 'model_type' => Article::class]);

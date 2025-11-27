@@ -13,7 +13,7 @@
         >
             <img
                 alt="Mahbub Tour"
-                src="{{url($settings->media?->path)}}"
+                src="{{$settings->media?->path ? url($settings->media?->path) : null}}"
                 class="w-full h-full min-h-[700px] xl:h-[850px] 2xl:min-h-[1200px] object-cover rounded-[32px]"
             />
         </div>
