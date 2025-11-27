@@ -12,6 +12,7 @@ use App\Models\Partner;
 use App\Models\QuestionAnswer;
 use App\Models\Review;
 use App\Models\Services;
+use App\Models\Settings;
 use App\Models\Tour;
 use App\Models\TourGroup;
 use App\Models\User;
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder
         Order::factory()->count(15)->create();
         Review::factory()->count(15)->create();
         Partner::factory()->count(10)->create();
+        Settings::factory()->count(1)->create();
 
         User::factory()->create([
             'name' => 'Admin',

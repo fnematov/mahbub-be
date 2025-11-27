@@ -22,7 +22,7 @@ class Contact extends Resource
 
     public static function label(): string
     {
-        return 'Контакты';
+        return 'Конфигурация';
     }
 
 

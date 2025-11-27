@@ -41,6 +41,16 @@ class Media extends Model
                 $media->path_en = $media->path_ru;
             }
         });
+
+        static::updating(function ($media) {
+            if (!$media->path_uz) {
+                $media->path_uz = $media->path_ru;
+            }
+
+            if (!$media->path_en) {
+                $media->path_en = $media->path_ru;
+            }
+        });
     }
 
     public function model(): MorphTo

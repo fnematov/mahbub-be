@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\ReviewStatusEnum;
+use App\Models\AboutUs;
 use App\Models\Address;
 use App\Models\Article;
 use App\Models\Contact;
@@ -12,6 +13,7 @@ use App\Models\Partner;
 use App\Models\QuestionAnswer;
 use App\Models\Review;
 use App\Models\Services;
+use App\Models\Settings;
 use App\Models\Tour;
 use App\Models\TourGroup;
 use Illuminate\Http\Request;
@@ -20,6 +22,7 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $settings = Settings::first();
         $tour_groups = TourGroup::withWhereHas('tours', function ($query) {
             $query->active();
         })
@@ -47,7 +50,7 @@ class HomeController extends Controller
         $faqs = QuestionAnswer::limit(10)->get();
 
         return view('index', compact('tour_groups', 'services', 'partners',
-            'reviews', 'articles', 'faqs', 'countries'));
+            'reviews', 'articles', 'faqs', 'countries', 'settings'));
     }
 
     public function tours()
@@ -141,7 +144,7 @@ class HomeController extends Controller
 
     public function about()
     {
-        $about = \App\Models\AboutUs::with('media')->first();
+        $about = AboutUs::with('media')->first();
         return view('about', compact('about'));
     }
 }

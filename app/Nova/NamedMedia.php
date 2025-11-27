@@ -27,7 +27,7 @@ class NamedMedia extends Resource
     public function fields(Request $request): array
     {
         return [
-            Image::make('Изображение – UZ', 'path_uz')
+            Image::make('Изображение', 'path_ru')
                 ->required()
                 ->fullWidth()
                 ->prunable()

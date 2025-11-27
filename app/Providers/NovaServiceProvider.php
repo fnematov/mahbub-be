@@ -71,9 +71,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
                     ->path('/resources/users')
                     ->icon('document-text'),
 
-                MenuSection::make('Контакты', [
+                MenuSection::make('Конфигурация', [
                     MenuItem::make('Контактные данные', '/resources/contacts'),
                     MenuItem::make('Адресные данные')->path('/resources/addresses'),
+                    MenuItem::make('Настройки')->path('/resources/settings/1/edit'),
+
                 ])->icon('document-text')
                     ->collapsable()
                     ->collapsedByDefault(),

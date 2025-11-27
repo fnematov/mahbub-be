@@ -13,7 +13,7 @@
         >
             <img
                 alt="Mahbub Tour"
-                src="{{asset('image/image2.jpg')}}"
+                src="{{url($settings->media?->path)}}"
                 class="w-full h-full min-h-[700px] xl:h-[850px] 2xl:min-h-[1200px] object-cover rounded-[32px]"
             />
         </div>
@@ -203,7 +203,8 @@
                                                 <p
                                                     class="font-sans font-normal md:text-lg text-base leading-[1.333em] text-text-gray m-0"
                                                 >
-                                                    {{$tour->days_count}} {{ __('messages.days') }} - {{$tour->nights_count}} {{ __('messages.nights') }}
+                                                    {{$tour->days_count}} {{ __('messages.days') }}
+                                                    - {{$tour->nights_count}} {{ __('messages.nights') }}
                                                 </p>
                                                 <div class="flex items-center gap-1.5">
                         <span
