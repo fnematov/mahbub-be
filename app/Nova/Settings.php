@@ -25,10 +25,8 @@ class Settings extends Resource
         return [
             ID::make()->sortable()->hide(),
 
-            MorphOne::make('Загрузка изображения', 'media', SettingsMedia::class)
-                ->required()
-                ->hideFromIndex()
-                ->asPanel(),
+            Image::make('изображения', 'media.path_ru')
+                ->onlyOnIndex(),
 
             Panel::make('Настройки', [
                 Text::make('Заголовок баннера - UZ', 'banner_title_uz')
@@ -86,11 +84,12 @@ class Settings extends Resource
                     ->sortable()
                     ->hideFromIndex()
                     ->size('w-1/3'),
-
             ]),
 
-            Image::make('изображения', 'media.path_ru')
-                ->onlyOnIndex(),
+            MorphOne::make('Загрузка изображения', 'media', SettingsMedia::class)
+                ->required()
+                ->hideFromIndex()
+                ->asPanel(),
         ];
     }
 }
