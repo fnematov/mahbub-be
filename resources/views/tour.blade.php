@@ -10,7 +10,8 @@
                     @if($tour->location?->parent?->flag)
                         <div
                             class="w-14 h-14 2xl:w-16 2xl:h-16 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0">
-                            <img src="{{url($tour->location->parent->flag)}}" alt="{{$tour->location->parent->name}}"
+                            <img src="{{Storage::url($tour->location->parent->flag)}}"
+                                 alt="{{$tour->location->parent->name}}"
                                  class="w-full h-full object-contain"
                                  onerror="this.style.display='none';">
                         </div>
@@ -57,7 +58,7 @@
                     <div class="swiper-wrapper">
                         @foreach($tour->media as $media)
                             <div class="swiper-slide w-full h-[400px] sm:h-[520px] rounded-[32px] overflow-hidden">
-                                <img src="{{url($media->path)}}" alt="{{$tour->name}}"
+                                <img src="{{Storage::url($media->path)}}" alt="{{$tour->name}}"
                                      class="w-full h-full object-cover"/>
                             </div>
                         @endforeach
@@ -69,7 +70,7 @@
                         @foreach($tour->media as $media)
                             <div
                                 class="swiper-slide max-[520px]:h-[100px] h-[124px] max-h-[124px] rounded-[32px] overflow-hidden">
-                                <img src="{{url($media->path)}}" alt="{{$tour->name}}"
+                                <img src="{{Storage::url($media->path)}}" alt="{{$tour->name}}"
                                      class="w-full h-full object-cover"/>
                             </div>
                         @endforeach

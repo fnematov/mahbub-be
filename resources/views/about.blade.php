@@ -18,7 +18,7 @@
                 class="flex justify-center items-start gap-5 flex-wrap xl:flex-nowrap 2xl:max-w-[1200px] max-w-[1000px] mx-auto px-8">
                 @foreach($about->media as $media)
                     <div class="flex flex-col items-center gap-5">
-                        <img src="{{url($media->path)}}"
+                        <img src="{{Storage::url($media->path)}}"
                              alt="{{$media->name}}"
                              class="object-cover w-[280px] lg:w-[320px] 2xl:w-[380px] 2xl:h-[491px] h-[350px] bg-bg-gray rounded-[32px] flex items-center justify-center"
                              onerror="this.style.display='none';">

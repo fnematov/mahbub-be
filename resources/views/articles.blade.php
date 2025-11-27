@@ -19,7 +19,7 @@
                 <a href="{{route('articles.show', $article->id)}}"
                    class="w-full max-w-[580px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity">
                     <div class="w-full h-[262px] 2xl:h-[362px] bg-bg-gray rounded-[32px] overflow-hidden">
-                        <img src="{{url($article->media?->path)}}" alt="{{$article->title}}"
+                        <img src="{{Storage::url($article->media?->path)}}" alt="{{$article->title}}"
                              class="w-full h-full object-cover"
                              onerror="this.style.display='none';">
                     </div>

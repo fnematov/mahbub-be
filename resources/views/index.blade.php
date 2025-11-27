@@ -13,7 +13,7 @@
         >
             <img
                 alt="Mahbub Tour"
-                src="{{$settings->media?->path ? url($settings->media?->path) : null}}"
+                src="{{$settings->media?->path ? Storage::url($settings->media?->path) : null}}"
                 class="w-full h-full min-h-[700px] xl:h-[850px] 2xl:min-h-[1200px] object-cover rounded-[32px]"
             />
         </div>
@@ -98,7 +98,7 @@
                 class="flex flex-col w-full gap-5 bg-bg-gray rounded-[32px] p-10 h-[400px] 2xl:h-[520px] relative overflow-hidden"
             >
                 <img
-                    src="{{url($service->media?->path)}}"
+                    src="{{Storage::url($service->media?->path)}}"
                     alt=""
                     class="absolute w-full h-full object-cover left-0 top-0"
                 />
@@ -171,7 +171,7 @@
                                     class="2xl:w-[540px] 2xl:h-[520px] xl:w-[420px] xl:h-[400px] w-[100%] h-[360px] rounded-[32px] overflow-hidden relative"
                                 >
                                     <img
-                                        src="{{url($tour->firstMedia->path)}}"
+                                        src="{{Storage::url($tour->firstMedia->path)}}"
                                         class="absolute w-full h-full left-0 top-0 object-cover inset-0 bg-bg-gray"
                                     />
                                     <div
@@ -180,7 +180,7 @@
                                         <div class="flex items-start gap-4 mb-2">
                                             @if($tour->location?->parent?->flag)
                                                 <img
-                                                    src="{{url($tour->location->parent->flag)}}"
+                                                    src="{{Storage::url($tour->location->parent->flag)}}"
                                                     alt="{{$tour->location->parent->name}}"
                                                     class="md:w-14 md:h-14 2xl:w-16 2xl:h-16 w-12 h-12 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
                                                 />
@@ -256,7 +256,7 @@
                 <div class="swiper-wrapper">
                     @foreach($partners as $partner)
                         <div class="swiper-slide bg-bg-gray flex items-center justify-center">
-                            <img src="{{url($partner->logo)}}" alt=""/>
+                            <img src="{{Storage::url($partner->logo)}}" alt=""/>
                         </div>
                     @endforeach
                 </div>
@@ -385,7 +385,7 @@
                         class="w-full max-w-[435px] bg-bg-gray rounded-[32px] overflow-hidden relative flex flex-col"
                     >
                         <img
-                            src="{{url($article->media?->path)}}"
+                            src="{{Storage::url($article->media?->path)}}"
                             alt="{{$article->title}}"
                             class="w-full object-cover 2xl:h-[320px] h-[260px] bg-bg-gray border-b border-[#D2D2D2] flex-shrink-0"
                         />

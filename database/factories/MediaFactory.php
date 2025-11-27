@@ -18,16 +18,16 @@ class MediaFactory extends Factory
     public function definition(): array
     {
         $paths = [
-            'storage/img.png',
-            'storage/img_1.png',
-            'storage/img_2.png',
-            'storage/img_3.png',
-            'storage/img_4.png',
-            'storage/img_5.png',
-            'storage/img_6.png',
-            'storage/img_7.png',
-            'storage/img_8.png',
-            'storage/img_9.png',
+            'img.png',
+            'img_1.png',
+            'img_2.png',
+            'img_3.png',
+            'img_4.png',
+            'img_5.png',
+            'img_6.png',
+            'img_7.png',
+            'img_8.png',
+            'img_9.png',
         ];
         return [
             'model_type' => 'App\\Models\\Article',

@@ -77,7 +77,7 @@
                     class="w-full md:max-w-[586px] 2xl:h-[520px] xl:h-[380px] h-[300px] bg-bg-gray rounded-[32px] overflow-hidden relative"
                 >
                     <img
-                        src="{{url($tour->firstMedia->path)}}"
+                        src="{{Storage::url($tour->firstMedia->path)}}"
                         alt="{{$tour->name}}"
                         class="absolute w-full inset-0 bg-bg-gray 2xl:h-[520px] h-[380px] object-cover"
                     />
@@ -87,7 +87,7 @@
                         <div class="flex items-start gap-4 mb-2">
                             @if($tour->location?->parent?->flag)
                                 <img
-                                    src="{{url($tour->location->parent->flag)}}"
+                                    src="{{Storage::url($tour->location->parent->flag)}}"
                                     alt="{{$tour->location->parent->name}}"
                                     class="2xl:w-16 2xl:h-16 xl:h-12 xl:w-12 w-10 h-10 rounded-full bg-[#D80027] flex items-center justify-center flex-shrink-0"
                                 />
@@ -110,7 +110,8 @@
                                 <p
                                     class="font-sans font-normal text-base 2xl:text-lg leading-[1.333em] text-text-gray m-0"
                                 >
-                                    {{$tour->days_count}} {{ __('messages.day') }} - {{$tour->nights_count}} {{ __('messages.nights') }}
+                                    {{$tour->days_count}} {{ __('messages.day') }}
+                                    - {{$tour->nights_count}} {{ __('messages.nights') }}
                                 </p>
                                 <div class="flex items-center gap-1.5">
                   <span

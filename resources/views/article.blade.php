@@ -17,7 +17,8 @@
         <section class="mb-[48px]">
             <div
                 class="w-full max-w-[1000px] 2xl:max-w-[1180px] h-[350px] sm:h-[450px] 2xl:h-[736px] bg-bg-gray rounded-[32px] overflow-hidden mx-auto">
-                <img src="{{url($article->media?->path)}}" alt="{{$article->title}}" class="w-full h-full object-cover"
+                <img src="{{Storage::url($article->media?->path)}}" alt="{{$article->title}}"
+                     class="w-full h-full object-cover"
                      onerror="this.style.display='none';">
             </div>
         </section>
