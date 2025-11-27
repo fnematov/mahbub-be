@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Settings;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use LaravelLocalization;
 
@@ -22,5 +24,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Carbon::setLocale(LaravelLocalization::getCurrentLocale());
+        View::composer('*', function ($view) {
+            $view->with('settings', Settings::first());
+        });
     }
 }

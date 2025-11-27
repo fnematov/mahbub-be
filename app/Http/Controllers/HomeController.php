@@ -13,7 +13,6 @@ use App\Models\Partner;
 use App\Models\QuestionAnswer;
 use App\Models\Review;
 use App\Models\Services;
-use App\Models\Settings;
 use App\Models\Tour;
 use App\Models\TourGroup;
 use Illuminate\Http\Request;
@@ -22,7 +21,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $settings = Settings::first();
         $tour_groups = TourGroup::withWhereHas('tours', function ($query) {
             $query->active();
         })
@@ -57,7 +55,6 @@ class HomeController extends Controller
             'articles',
             'faqs',
             'countries',
-            'settings'
         ));
     }
 
@@ -99,8 +96,7 @@ class HomeController extends Controller
     {
         $contacts = Contact::all();
         $addresses = Address::all();
-        $settings = Settings::first();
-        return view('contacts', compact('contacts', 'addresses', 'settings'));
+        return view('contacts', compact('contacts', 'addresses'));
     }
 
     public function submitOrder(Request $request)
